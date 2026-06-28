@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_box/core/network/services/network_service.dart';
+import 'package:movie_box/core/services/network/services/network_service.dart';
 
 part 'network_event.dart';
 part 'network_state.dart';

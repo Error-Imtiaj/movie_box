@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
-import 'package:movie_box/core/network/bloc/network_bloc.dart';
+import 'package:movie_box/core/services/network/bloc/network_bloc.dart';
 import 'package:movie_box/core/router/router_navigation.dart';
 import 'package:movie_box/core/theme/app_theme.dart';
+import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 
 final GlobalKey<ScaffoldMessengerState> messengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -33,6 +34,7 @@ class _MovieAppState extends State<MovieApp> {
             BlocProvider(
               create: (_) => getIt<NetworkBloc>()..add(NetworkStarted()),
             ),
+            BlocProvider(create: (_) => getIt<SplashBloc>()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
@@ -57,19 +59,15 @@ class _MovieAppState extends State<MovieApp> {
                     messengerKey.currentState?.showSnackBar(
                       SnackBar(
                         backgroundColor: AppColors.error,
-                        content: Text(AppStrings.noInternetConnection, textAlign: TextAlign.center,),
+                        content: Text(
+                          AppStrings.noInternetConnection,
+                          textAlign: TextAlign.center,
+                        ),
                         duration: Duration(days: 1),
                       ),
-                      // NoInternetOverlay(
-                      //   backgroundColor: AppColors.error,
-                      //   message: AppStrings.noInternetConnection,
-                      //   icon: HugeIcons.strokeRounded24HoursClock,
-                      //   duration: Duration(days: 1),
-                      // ),
                     );
                   } else if (state is NetworkConnected && _wasDisconnected) {
                     _wasDisconnected = false;
-
                     messengerKey.currentState?.removeCurrentSnackBar();
                     if (messengerKey.currentState == null) {
                       debugPrint('ScaffoldMessenger is null');
@@ -77,16 +75,13 @@ class _MovieAppState extends State<MovieApp> {
                     }
                     messengerKey.currentState?.showSnackBar(
                       SnackBar(
-                        content: Text(AppStrings.backOnline, textAlign: TextAlign.center,),
+                        content: Text(
+                          AppStrings.backOnline,
+                          textAlign: TextAlign.center,
+                        ),
                         backgroundColor: AppColors.success,
                         duration: Duration(seconds: 2),
                       ),
-                      // NoInternetOverlay(
-                      //   backgroundColor: AppColors.success,
-                      //   message: AppStrings.backOnline,
-                      //   icon: HugeIcons.strokeRounded24HoursClock,
-                      //   duration: Duration(seconds: 2),
-                      // ),
                     );
                   }
                 },

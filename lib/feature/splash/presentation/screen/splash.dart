@@ -1,8 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -48,6 +51,7 @@ class _SplashScreenState extends State<SplashScreen>
       _animations.add(animation);
       Future.delayed(Duration(milliseconds: i * 100), controller.forward);
     }
+    context.read<SplashBloc>().add(SplashStarted());
   }
 
   @override
@@ -60,25 +64,35 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          children: List.generate(_chars.length, (i) {
-            return FadeTransition(
-              opacity: _controllers[i],
-              child: SlideTransition(
-                position: _animations[i],
-                child: Text(
-                  _chars[i],
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40.sp,
+    return BlocListener<SplashBloc, SplashState>(
+      listener: (context, state) {
+        if (state is SplashNavigateToOnboarding) {
+          context.go(AppStrings.onboardingScreen);
+        }
+        if (state is SplashNavigateToHome) {
+          context.go(AppStrings.homeScreen);
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: List.generate(_chars.length, (i) {
+              return FadeTransition(
+                opacity: _controllers[i],
+                child: SlideTransition(
+                  position: _animations[i],
+                  child: Text(
+                    _chars[i],
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40.sp,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ),
       ),
     );
