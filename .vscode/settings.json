@@ -1,0 +1,9 @@
+{
+  "dart.flutterSdkPath": ".fvm/versions/stable",
+   "dart.autoImportCompletions": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  }
+}
