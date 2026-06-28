@@ -56,16 +56,20 @@ class _MovieAppState extends State<MovieApp> {
                       debugPrint('ScaffoldMessenger is null');
                       return;
                     }
-                    messengerKey.currentState?.showSnackBar(
-                      SnackBar(
-                        backgroundColor: AppColors.error,
-                        content: Text(
-                          AppStrings.noInternetConnection,
-                          textAlign: TextAlign.center,
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      messengerKey.currentState?.showSnackBar(
+                        SnackBar(
+                          backgroundColor: AppColors.error,
+                          content: Text(
+                            AppStrings.noInternetConnection,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: AppColors.white),
+                          ),
+                          duration: Duration(days: 1),
                         ),
-                        duration: Duration(days: 1),
-                      ),
-                    );
+                      );
+                    });
                   } else if (state is NetworkConnected && _wasDisconnected) {
                     _wasDisconnected = false;
                     messengerKey.currentState?.removeCurrentSnackBar();
@@ -73,16 +77,20 @@ class _MovieAppState extends State<MovieApp> {
                       debugPrint('ScaffoldMessenger is null');
                       return;
                     }
-                    messengerKey.currentState?.showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          AppStrings.backOnline,
-                          textAlign: TextAlign.center,
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      messengerKey.currentState?.showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            AppStrings.backOnline,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: AppColors.white),
+                          ),
+                          backgroundColor: AppColors.success,
+                          duration: Duration(seconds: 2),
                         ),
-                        backgroundColor: AppColors.success,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
+                      );
+                    });
                   }
                 },
                 child: child!,
