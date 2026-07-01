@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/const/app_asset.dart';
 import 'package:movie_box/core/const/app_size.dart';
 import 'package:movie_box/core/const/app_strings.dart';
+import 'package:movie_box/core/router/routes.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -134,11 +135,11 @@ class _SplashScreenState extends State<SplashScreen>
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashNavigateToOnboarding) {
-          context.go(AppStrings.onboardingScreen);
+          context.go(Routes.onboardingScreen);
         }
 
         if (state is SplashNavigateToHome) {
-          context.go(AppStrings.homeScreen);
+          context.go(Routes.homeScreen);
         }
       },
       child: Scaffold(

@@ -10,6 +10,7 @@ class AppColors {
 
   /// Primary text color.
   static const Color textColor = Color(0xFF001F3D);
+  static const Color textColorLight = Colors.white70;
 
   /// Primary buttons, chips, selected states.
   static const Color buttonBackgroundColor = Color(0xFFF7B980);

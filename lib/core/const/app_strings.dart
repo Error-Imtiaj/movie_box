@@ -19,10 +19,22 @@ class AppStrings {
       'Create your own watchlist and start your entertainment journey.';
   static const String skip = 'Skip';
   static const String next = 'Next';
-  static const String watchNow = 'Watch Now';
+  static const String watchNow = 'Watch Now'; 
+
+  // TMDB SCREEN 
+  static const String tmdbTitle = 'Connect Your TMDB Key';
+  static const String tmdbDescription =
+      'Movie Box uses The Movie Database API to fetch real movie and TV data. A free API key is required.';
+  static const String tmdbStep1 = 'Create a free account at themoviedb.org';
+  static const String tmdbStep2 = 'Go to Settings → API → Request an API key';
+  static const String tmdbStep3 = 'Copy your v3 API key and paste it below';
+  static const String tmdbHintText = 'Paste your TMDB API key here...';
+  static const String openTMDBWebsite = 'Open TMDB website';
+  static const String startStreaming = 'Start Streaming';
 
   // ROUTES
   static const String splashScreen = '/';
   static const String onboardingScreen = '/onboarding';
   static const String homeScreen = '/home';
+  static const String navigationScreen = '/navigation';
 }

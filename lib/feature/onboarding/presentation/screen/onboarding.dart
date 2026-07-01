@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
+import 'package:movie_box/core/router/routes.dart';
 import 'package:movie_box/core/services/local_storage/services/local_storage_service.dart';
 import 'package:movie_box/feature/onboarding/model/onboarding_model.dart';
 
@@ -28,7 +29,7 @@ class _OnboardingState extends State<Onboarding> {
               alignment: Alignment.topRight,
               child: TextButton(
                 onPressed: () async {
-                  context.go(AppStrings.homeScreen);
+                  context.go(Routes.homeScreen);
                   await getIt<LocalStorageService>().setFirstTime(false);
                 },
                 child: Text(
@@ -115,7 +116,7 @@ class _OnboardingState extends State<Onboarding> {
                   onPressed: () async {
                     if (currentIndex == onboardingData.length - 1) {
                       // Navigate Home/Login
-                      context.go(AppStrings.homeScreen);
+                      context.go(Routes.homeScreen);
                       await getIt<LocalStorageService>().setFirstTime(false);
                     } else {
                       _controller.nextPage(
