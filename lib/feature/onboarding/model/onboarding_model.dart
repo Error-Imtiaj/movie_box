@@ -1,4 +1,5 @@
 import 'package:movie_box/core/const/app_asset.dart';
+import 'package:movie_box/core/const/app_strings.dart';
 
 class OnboardingModel {
   final String image;
@@ -15,20 +16,17 @@ class OnboardingModel {
 const onboardingData = [
   OnboardingModel(
     image: AppAsset.onboarding1,
-    title: 'Unlimited Movies',
-    description:
-        'Discover thousands of movies and TV shows from every genre.',
+    title: AppStrings.onboardingTitle1,
+    description: AppStrings.onboardingDescription1,
   ),
   OnboardingModel(
     image: AppAsset.onboarding2,
-    title: 'Watch Anywhere',
-    description:
-        'Enjoy your favorite movies anytime on your phone or tablet.',
+    title: AppStrings.onboardingTitle2,
+    description: AppStrings.onboardingDescription2,
   ),
   OnboardingModel(
     image: AppAsset.onboarding3,
-    title: 'Ready to Explore?',
-    description:
-        'Create your own watchlist and start your entertainment journey.',
+    title: AppStrings.onboardingTitle3,
+    description: AppStrings.onboardingDescription3,
   ),
 ];

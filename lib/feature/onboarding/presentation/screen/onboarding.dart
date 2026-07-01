@@ -28,10 +28,16 @@ class _OnboardingState extends State<Onboarding> {
             Align(
               alignment: Alignment.topRight,
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
                   context.go(AppStrings.homeScreen);
+                  await getIt<LocalStorageService>().setFirstTime(false);
                 },
-                child: const Text("Skip", style: TextStyle(fontSize: 16, color: AppColors.textColor)),
+                child: Text(
+                  AppStrings.skip,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
 
@@ -121,9 +127,9 @@ class _OnboardingState extends State<Onboarding> {
                   },
                   child: Text(
                     currentIndex == onboardingData.length - 1
-                        ? "Watch Now"
-                        : "Next",
-                    style: const TextStyle(fontSize: 18, color: AppColors.textColor),
+                        ? AppStrings.watchNow
+                        : AppStrings.next,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
               ),
