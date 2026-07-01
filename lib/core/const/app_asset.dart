@@ -9,5 +9,8 @@ class AppAsset {
   static const String onboarding2 = '${baseSvgPath}2.svg';
   static const String onboarding3 = '${baseSvgPath}3.svg';
 
+  // SPLASH IMAGE
+  static const String splash = '${baseSvgPath}logo.svg';
+
 
 }

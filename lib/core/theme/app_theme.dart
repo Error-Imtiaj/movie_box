@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_box/core/const/app_size.dart';
 
 import '../const/app_colors.dart';
 
@@ -23,7 +24,7 @@ class AppTheme {
       /// Example: Movie Details, Profile
       displayLarge: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 32.sp,
+        fontSize: AppSize.fontSizeExtraExtraLarge.sp,
         fontWeight: FontWeight.bold,
         color: AppColors.textColor,
       ),
@@ -32,7 +33,7 @@ class AppTheme {
       /// Example: Trending, Popular, Continue Watching
       headlineLarge: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 28.sp,
+        fontSize: AppSize.fontSizeExtraLarge.sp,
         fontWeight: FontWeight.bold,
         color: AppColors.textColor,
       ),
@@ -40,7 +41,7 @@ class AppTheme {
       /// AppBar title.
       headlineMedium: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 24.sp,
+        fontSize: AppSize.fontSizeLarge.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.textColor,
       ),
@@ -48,7 +49,7 @@ class AppTheme {
       /// Movie title.
       titleLarge: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 20.sp,
+        fontSize: AppSize.fontSizeMediumLarge.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.textColor,
       ),
@@ -56,7 +57,7 @@ class AppTheme {
       /// Card title.
       titleMedium: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 18.sp,
+        fontSize: AppSize.fontSizeMedium.sp,
         fontWeight: FontWeight.w600,
         color: AppColors.textColor,
       ),
@@ -65,7 +66,7 @@ class AppTheme {
       /// Example: Genre, Release Date
       titleSmall: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 16.sp,
+        fontSize: AppSize.fontSizeSmallMedium.sp,
         fontWeight: FontWeight.w500,
         color: AppColors.subtitleColor,
       ),
@@ -73,7 +74,7 @@ class AppTheme {
       /// Button text.
       labelLarge: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 16.sp,
+        fontSize: AppSize.fontSizeSmallMedium.sp,
         fontWeight: FontWeight.bold,
         color: AppColors.white,
       ),
@@ -81,7 +82,7 @@ class AppTheme {
       /// Normal body text.
       bodyLarge: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 16,
+        fontSize: AppSize.fontSizeSmallMedium.sp,
         color: AppColors.textColor,
       ),
 
@@ -89,7 +90,7 @@ class AppTheme {
       /// Example: Movie Overview
       bodyMedium: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 14.sp,
+        fontSize: AppSize.fontSizeSmall.sp,
         color: AppColors.subtitleColor,
         height: 1.5.h,
       ),
@@ -98,7 +99,7 @@ class AppTheme {
       /// Example: Rating, Duration
       bodySmall: TextStyle(
         fontFamily: 'Sansita',
-        fontSize: 12.sp,
+        fontSize: AppSize.fontSizeSmall.sp,
         color: AppColors.subtitleColor,
       ),
     ),
