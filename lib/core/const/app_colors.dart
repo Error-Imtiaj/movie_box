@@ -41,6 +41,11 @@ class AppColors {
   static const Color transparent = Colors.transparent;
 
   // ===========================================================================
+  // API PAGE COLORS
+  // ===========================================================================
+  static const Color linkTextColor = Color(0xFFE53935);
+
+  // ===========================================================================
   // NAVIGATION BAR COLORS
   // ===========================================================================
   /// Navigation bar background.

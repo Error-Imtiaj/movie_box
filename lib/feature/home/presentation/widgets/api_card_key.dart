@@ -86,12 +86,12 @@ class ApiKeyCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Row(
                 children: [
-                  const Icon(Icons.open_in_new, color: Colors.red),
+                  const Icon(Icons.open_in_new, color: AppColors.linkTextColor),
                   const SizedBox(width: 12),
                   Text(
                     AppStrings.openTMDBWebsite,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.red,
+                      color: AppColors.linkTextColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
