@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:movie_box/core/const/app_colors.dart';
+import 'package:movie_box/core/const/app_icons.dart';
+import 'package:movie_box/core/const/app_size.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -12,48 +16,50 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primary = Color(0xffE50914);
-
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Container(
-          height: 75,
-          decoration: BoxDecoration(
-            color: const Color(0xff1A1A1F),
-            borderRadius: BorderRadius.circular(40),
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 20,
-                color: Colors.black38,
-              )
-            ],
-          ),
+    return BottomAppBar(
+      surfaceTintColor: Colors.transparent,
+      shape: const CircularNotchedRectangle(),
+      notchMargin: AppSize.navigationBarNotchMargin,
+      color: AppColors.navigationBarBackgroundColor,
+      // elevation: 12,
+      child: SafeArea(
+        child: SizedBox(
+          height: AppSize.navigationBarHeight,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _item(Icons.home_rounded, 0),
-              _item(Icons.search_rounded, 1),
-
-              GestureDetector(
-                onTap: () => onTap(2),
-                child: Container(
-                  width: 64,
-                  height: 64,
-                  decoration: const BoxDecoration(
-                    color: primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.play_arrow_rounded,
-                    color: Colors.white,
-                    size: 36,
-                  ),
+              Expanded(
+                child: _navItem(
+                  icon: AppIcons.homeIcon,
+                  label: "Home",
+                  index: 0,
                 ),
               ),
 
-              _item(Icons.favorite_rounded, 3),
-              _item(Icons.person_rounded, 4),
+              Expanded(
+                child: _navItem(
+                  icon: AppIcons.searchIcon,
+                  label: "Search",
+                  index: 1,
+                ),
+              ),
+
+              const SizedBox(width: 70),
+
+              Expanded(
+                child: _navItem(
+                  icon: AppIcons.favouriteIcon,
+                  label: "Favorite",
+                  index: 3,
+                ),
+              ),
+
+              Expanded(
+                child: _navItem(
+                  icon: AppIcons.profileIcon,
+                  label: "Profile",
+                  index: 4,
+                ),
+              ),
             ],
           ),
         ),
@@ -61,18 +67,44 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget _item(IconData icon, int index) {
+  Widget _navItem({
+    required List<List<dynamic>> icon,
+    required String label,
+    required int index,
+  }) {
     final bool selected = currentIndex == index;
 
-    return GestureDetector(
+    return InkWell(
+      splashColor: AppColors.transparent,
+      highlightColor: AppColors.transparent,
+      hoverColor: AppColors.transparent,
+      focusColor: AppColors.transparent,
+      splashFactory: NoSplash.splashFactory,
       onTap: () => onTap(index),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        child: Icon(
-          icon,
-          color: selected ? const Color(0xffE50914) : Colors.grey,
-          size: selected ? 30 : 26,
-        ),
+      borderRadius: BorderRadius.circular(50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          HugeIcon(
+            icon: icon,
+            size: AppSize.navigationBarIconSize,
+            strokeWidth: AppSize.navigationIconStrokeWidth,
+            color: selected
+                ? AppColors.navigationBarSelectedItemColor
+                : AppColors.navigationBarUnselectedItemColor,
+          ),
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: AppSize.navigationTextSize,
+              fontWeight: FontWeight.w700,
+              color: selected
+                  ? AppColors.navigationBarSelectedItemColor
+                  : AppColors.navigationBarUnselectedItemColor,
+            ),
+          ),
+        ],
       ),
     );
   }

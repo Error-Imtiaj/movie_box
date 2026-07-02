@@ -5,6 +5,13 @@ class MovieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Movie Screen',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      )
+    );
   }
 }

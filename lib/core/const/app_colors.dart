@@ -39,4 +39,14 @@ class AppColors {
 
   /// Transparent.
   static const Color transparent = Colors.transparent;
+
+  // ===========================================================================
+  // NAVIGATION BAR COLORS
+  // ===========================================================================
+  /// Navigation bar background.
+  static const Color navigationBarBackgroundColor = Color(0xFF001F3D);
+  static const Color navigationBarSelectedItemColor = Colors.white;
+  static const Color navigationBarUnselectedItemColor = Colors.white70;
+ // static const Color navigationBarIndicatorColor = Colors.white;
+  static const Color navigationFloatingDockedColor = Color(0xffCB2957);
 }

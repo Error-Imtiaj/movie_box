@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:movie_box/core/const/app_colors.dart';
+import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/feature/discover/presentation/screens/discover_screen.dart';
 import 'package:movie_box/feature/favourite/presentation/screens/favourite_screen.dart';
 import 'package:movie_box/feature/home/presentation/screen/movie_screen.dart';
@@ -16,7 +19,7 @@ class NavigatorScreen extends StatefulWidget {
 class _NavigatorScreenState extends State<NavigatorScreen> {
   int currentIndex = 0;
 
-  final pages = const [
+  final List<Widget> pages = const [
     MovieScreen(),
     SearchScreen(),
     DiscoverScreen(),
@@ -28,7 +31,28 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+
       body: IndexedStack(index: currentIndex, children: pages),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.navigationFloatingDockedColor,
+        elevation: 8,
+        shape: const CircleBorder(),
+        onPressed: () {
+          setState(() {
+            currentIndex = 2;
+          });
+        },
+        child: HugeIcon(
+          icon: AppIcons.playIcon,
+          color: AppColors.navigationBarSelectedItemColor,
+          size: 34,
+          strokeWidth: 2,
+        ),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
       bottomNavigationBar: BottomNavBar(
         currentIndex: currentIndex,
         onTap: (index) {

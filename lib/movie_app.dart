@@ -59,6 +59,8 @@ class _MovieAppState extends State<MovieApp> {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       messengerKey.currentState?.showSnackBar(
                         SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          
                           backgroundColor: AppColors.error,
                           content: Text(
                             AppStrings.noInternetConnection,
@@ -80,6 +82,7 @@ class _MovieAppState extends State<MovieApp> {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       messengerKey.currentState?.showSnackBar(
                         SnackBar(
+                          behavior: SnackBarBehavior.floating,
                           content: Text(
                             AppStrings.backOnline,
                             textAlign: TextAlign.center,
