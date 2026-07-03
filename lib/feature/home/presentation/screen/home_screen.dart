@@ -20,21 +20,23 @@ class _HomeScreenState extends State<HomeScreen> {
     final TextEditingController _apiKeyController = TextEditingController();
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ApiKeyCard(apicontroller: _apiKeyController, onSubmit: () {
-                // Handle the button press action here
-                // SET API KEY
-                getIt<LocalStorageService>().setApiKey(_apiKeyController.text.trim());
-                debugPrint('API Key set: ${_apiKeyController.text}');
-                context.go(Routes.navigatorScreen);
-              }),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ApiKeyCard(apicontroller: _apiKeyController, onSubmit: () {
+                  // Handle the button press action here
+                  // SET API KEY
+                  getIt<LocalStorageService>().setApiKey(_apiKeyController.text.trim());
+                  debugPrint('API Key set: ${_apiKeyController.text}');
+                  context.go(Routes.navigatorScreen);
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );
