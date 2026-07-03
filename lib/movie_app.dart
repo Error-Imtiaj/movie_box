@@ -7,6 +7,7 @@ import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/services/network/bloc/network_bloc.dart';
 import 'package:movie_box/core/router/router_navigation.dart';
 import 'package:movie_box/core/theme/app_theme.dart';
+import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 
 final GlobalKey<ScaffoldMessengerState> messengerKey =
@@ -35,6 +36,7 @@ class _MovieAppState extends State<MovieApp> {
               create: (_) => getIt<NetworkBloc>()..add(NetworkStarted()),
             ),
             BlocProvider(create: (_) => getIt<SplashBloc>()),
+            BlocProvider(create: (_) => getIt<HomeBloc>()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
@@ -60,7 +62,7 @@ class _MovieAppState extends State<MovieApp> {
                       messengerKey.currentState?.showSnackBar(
                         SnackBar(
                           behavior: SnackBarBehavior.floating,
-                          
+
                           backgroundColor: AppColors.error,
                           content: Text(
                             AppStrings.noInternetConnection,

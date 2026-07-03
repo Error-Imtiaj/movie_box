@@ -8,10 +8,11 @@ import 'package:url_launcher/url_launcher.dart';
 class ApiKeyCard extends StatelessWidget {
   final TextEditingController apicontroller;
   final VoidCallback onSubmit;
+  final bool isLoading;
   const ApiKeyCard({
     super.key,
     required this.apicontroller,
-    required this.onSubmit,
+    required this.onSubmit, required this.isLoading,
   });
 
   @override
@@ -125,7 +126,7 @@ class ApiKeyCard extends StatelessWidget {
             width: double.infinity,
             height: 60,
             child: ElevatedButton(
-              onPressed: onSubmit,
+              onPressed: isLoading ? null : onSubmit,
               style: ElevatedButton.styleFrom(
                 disabledBackgroundColor: const Color(0xff2A2A31),
                 shape: RoundedRectangleBorder(
