@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/router/routes.dart';
+import 'package:movie_box/feature/details/bloc/details_bloc.dart';
+import 'package:movie_box/feature/details/model/details_argument.dart';
+import 'package:movie_box/feature/details/presentation/screens/details_screen.dart';
 import 'package:movie_box/feature/home/presentation/screen/home_screen.dart';
 import 'package:movie_box/feature/navigator/presentation/screens/navigator_screen.dart';
 import 'package:movie_box/feature/onboarding/presentation/screen/onboarding.dart';
@@ -50,5 +53,26 @@ final routerNavigation = GoRouter(
         );
       },
     ),
+
+    GoRoute(
+  path: Routes.detailsScreen,
+  name: Routes.detailsScreen,
+  builder: (context, state) {
+    final extra = state.extra as DetailsArguments;
+
+    return BlocProvider(
+      create: (_) => getIt<DetailsBloc>()
+        ..add(
+          LoadDetailsEvent(
+            id: extra.id,
+            mediaType: extra.mediaType,
+          ),
+        ),
+      child: DetailsScreen(
+        arguments: extra,
+      ),
+    );
+  },
+),
   ],
 );

@@ -4,6 +4,8 @@ import 'package:movie_box/core/services/local_storage/services/local_storage_ser
 import 'package:movie_box/core/services/network/bloc/network_bloc.dart';
 import 'package:movie_box/core/services/network/services/dio_client.dart';
 import 'package:movie_box/core/services/network/services/network_service.dart';
+import 'package:movie_box/feature/details/bloc/details_bloc.dart';
+import 'package:movie_box/feature/details/repository/detail_repository.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/home/repository/home_repository.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
@@ -46,5 +48,11 @@ class ServiceLocator {
 
     // SEE ALL BLOC
     getIt.registerFactory(() => SeeAllBloc(getIt<HomeRepository>()));
+
+    // DETAILS REPOSITORY
+    getIt.registerLazySingleton(() => DetailsRepository(getIt<Dio>()));
+
+    // DETAILS BLOC
+    getIt.registerFactory(() => DetailsBloc(getIt<DetailsRepository>()));
   }
 }

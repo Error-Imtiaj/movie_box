@@ -7,6 +7,7 @@ import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/services/network/bloc/network_bloc.dart';
 import 'package:movie_box/core/router/router_navigation.dart';
 import 'package:movie_box/core/theme/app_theme.dart';
+import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
@@ -39,6 +40,7 @@ class _MovieAppState extends State<MovieApp> {
             BlocProvider(create: (_) => getIt<SplashBloc>()),
             BlocProvider(create: (_) => getIt<HomeBloc>()),
             BlocProvider(create: (_) => getIt<SeeAllBloc>()),
+            BlocProvider(create: (_) => getIt<DetailsBloc>()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

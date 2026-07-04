@@ -6,5 +6,6 @@ class Routes {
   static const String homeScreen = AppStrings.homeScreen;
   static const String navigatorScreen = AppStrings.navigationScreen;
   static const String seeAllScreen = AppStrings.seeAllScreen;
-  
+  static const String detailsScreen = AppStrings.detailsScreen;
+
 }

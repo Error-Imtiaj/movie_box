@@ -17,4 +17,12 @@ class AppIcons {
   static const List<List<dynamic>> calenderIcon = HugeIcons.strokeRoundedCalendar01;
   static const List<List<dynamic>> starIcon = HugeIcons.strokeRoundedStar;
 
+  // ===========================================================================
+  // DETAILS SCREEN ICONS
+  // ===========================================================================
+  static const List<List<dynamic>> backIcon = HugeIcons.strokeRoundedArrowLeft02;
+  static const List<List<dynamic>> shareIcon = HugeIcons.strokeRoundedShare01;
+  static const List<List<dynamic>> bookmarkIcon = HugeIcons.strokeRoundedBookmark01;
+  static const List<List<dynamic>> arrowDownIcon = HugeIcons.strokeRoundedArrowDown02;
+
 }

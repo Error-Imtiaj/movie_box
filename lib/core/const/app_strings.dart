@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppStrings {
   // App Strings
   // APP NAME
@@ -38,6 +40,7 @@ class AppStrings {
   static const String homeScreen = '/home';
   static const String navigationScreen = '/navigation';
   static const String seeAllScreen = '/see-all';
+  static const String detailsScreen = '/details';
 
   // MOVIE CATEGORY
   static const String trendingMovies = 'Trending Movies';
@@ -53,6 +56,8 @@ class AppStrings {
   static const String tmdbApiUrl = 'TMDB_API_URL';
   static const String tmdbTrendingImageUrl = "https://image.tmdb.org/t/p/w780";
   static const String tmdbMovieImageUrl = "https://image.tmdb.org/t/p/w500";
+  static const tmdbProfileImageUrl = "https://image.tmdb.org/t/p/w185";
+  static const String tmdbDetailsImageUrl = "https://image.tmdb.org/t/p/original";
 
   // HOME SCREEN
   static const String seeAll = 'See All';

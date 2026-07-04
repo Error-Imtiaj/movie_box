@@ -27,6 +27,7 @@ class AppCachedNetworkImage extends StatelessWidget {
       imageUrl: imageUrl,
       width: width,
       height: height,
+      
       fit: fit,
       placeholder: (_, __) =>
           placeholder ??

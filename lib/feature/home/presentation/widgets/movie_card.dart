@@ -9,14 +9,14 @@ import 'package:movie_box/feature/home/presentation/widgets/movie_poster.dart';
 class MovieCard extends StatelessWidget {
   final MovieModel movie;
   final String? heroTag;
-  final void Function(MovieModel movie)? onTap;
+  final VoidCallback? onTap;
   const MovieCard({super.key, required this.movie, this.heroTag, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return InkWell(
-      onTap: onTap != null ? () => onTap!(movie) : null,
+      onTap: onTap,
       borderRadius: BorderRadius.circular(AppSize.movieCardBoxRadius.r),
       splashFactory: NoSplash.splashFactory,
       splashColor: AppColors.transparent,
