@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/router/routes.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
-import 'package:movie_box/feature/details/model/TRAILER_PLAYER_ARGUMENT.DART';
 import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/details/presentation/screens/details_screen.dart';
 import 'package:movie_box/feature/home/presentation/screen/home_screen.dart';

@@ -286,7 +286,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           //   style: theme.textTheme.titleMedium,
                           // ),
                           //const SizedBox(height: 16),
-                          RecommendationSection(movies: state.recommendations),
+                          SafeArea(child: RecommendationSection(movies: state.recommendations)),
                           const SizedBox(height: 24),
                         ],
                       ),

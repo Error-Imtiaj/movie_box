@@ -1,10 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/common/app_cache_network_image.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
+import 'package:movie_box/core/router/routes.dart';
+import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 
 class TrendingSlider extends StatelessWidget {
@@ -110,7 +113,9 @@ class TrendingSlider extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          movie.mediaType == AppStrings.smalltV ? AppStrings.tvSeries : AppStrings.movie,
+                          movie.mediaType == AppStrings.smalltV
+                              ? AppStrings.tvSeries
+                              : AppStrings.movie,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -121,8 +126,8 @@ class TrendingSlider extends StatelessWidget {
 
                       const SizedBox(width: 10),
 
-                       HugeIcon(
-                       icon: AppIcons.starIcon,
+                      HugeIcon(
+                        icon: AppIcons.starIcon,
                         color: AppColors.ratingBadgeIconColor,
                         size: 18,
                       ),
@@ -191,7 +196,16 @@ class TrendingSlider extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push(
+                            Routes.detailsScreen,
+                            extra: DetailsArguments(
+                              id: movie.id,
+                              mediaType: movie.mediaType ?? "movie",
+                              heroTag: "${movie.title}_${movie.id}",
+                            ),
+                          );
+                        },
                         icon: const Icon(Icons.info_outline),
                         label: const Text("Details"),
                       ),
