@@ -26,173 +26,91 @@ class EpisodeCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 18),
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(10),
+        height: 110,
         decoration: BoxDecoration(
           color: theme.cardColor,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.withOpacity(.12)),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            /// Thumbnail
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(18),
-              ),
-              child: Stack(
-                children: [
-                  AppCachedNetworkImage(
-                    imageUrl: "$imageUrl${episode.stillPath ?? ""}",
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
-
-                  Positioned.fill(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black26,
-                            Colors.black87,
-                          ],
+              borderRadius: BorderRadius.circular(12),
+              child: SizedBox(
+                width: 140,
+                height: 90,
+                child: Stack(
+                  children: [
+                    AppCachedNetworkImage(
+                      imageUrl: "$imageUrl${episode.stillPath ?? ""}",
+                      width: 140,
+                      height: 90,
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned.fill(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black54,
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-
-                  Positioned(
-                    left: 14,
-                    bottom: 14,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black87,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text(
-                        "Episode ${episode.episodeNumber}",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                    Center(
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          color: Colors.black54,
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    ),
-                  ),
-
-                  Positioned(
-                    top: 14,
-                    right: 14,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black87,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        children: [
-                          HugeIcon(
-                            icon: AppIcons.starIcon,
-                            color: AppColors.ratingBadgeIconColor,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            episode.voteAverage.toStringAsFixed(1),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const Positioned.fill(
-                    child: Center(
-                      child: CircleAvatar(
-                        radius: 28,
-                        backgroundColor: Colors.black54,
-                        child: Icon(
+                        child: const Icon(
                           Icons.play_arrow_rounded,
                           color: Colors.white,
-                          size: 34,
+                          size: 24,
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-
-            Padding(
-              padding: const EdgeInsets.all(16),
+            const SizedBox(width: 14),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     episode.name,
-                    style: theme.textTheme.titleMedium?.copyWith(
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: AppColors.textColorDark,
                     ),
                   ),
-
-                  const SizedBox(height: 8),
-
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.schedule_rounded,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
-
-                      const SizedBox(width: 5),
-
-                      Text(
-                        "${episode.runtime} min",
-                        style: theme.textTheme.bodySmall,
-                      ),
-
-                      const SizedBox(width: 16),
-
-                      const Icon(
-                        Icons.calendar_today_rounded,
-                        size: 15,
-                        color: Colors.grey,
-                      ),
-
-                      const SizedBox(width: 5),
-
-                      Text(
-                        episode.airDate,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
+                  const SizedBox(height: 2),
+                  Text(
+                    "Episode ${episode.episodeNumber} • ${episode.runtime} min",
+                    style: theme.textTheme.bodySmall,
                   ),
-
-                  const SizedBox(height: 12),
-
+                 // const SizedBox(height: 6),
                   Text(
                     episode.overview.isEmpty
                         ? "No overview available."
                         : episode.overview,
-                    maxLines: 4,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey.shade400,
-                      height: 1.45,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: Colors.grey.shade500,
                     ),
                   ),
                 ],

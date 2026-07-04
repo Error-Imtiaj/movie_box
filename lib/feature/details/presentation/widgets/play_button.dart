@@ -7,14 +7,14 @@ class PlayButton extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final bool outlined;
-  final IconData? icon;
+  final List<List<dynamic>> icon;
 
   const PlayButton({
     super.key,
     required this.text,
     this.onTap,
     this.outlined = false,
-    this.icon,
+    required this.icon,
   });
 
   @override
@@ -41,8 +41,8 @@ class PlayButton extends StatelessWidget {
           ),
         ),
         icon: icon != null
-            ? Icon(
-                icon,
+            ? HugeIcon(
+                icon :icon,
                 size: 20,
               )
             : HugeIcon(

@@ -24,5 +24,6 @@ class AppIcons {
   static const List<List<dynamic>> shareIcon = HugeIcons.strokeRoundedShare01;
   static const List<List<dynamic>> bookmarkIcon = HugeIcons.strokeRoundedBookmark01;
   static const List<List<dynamic>> arrowDownIcon = HugeIcons.strokeRoundedArrowDown02;
+  static const List<List<dynamic>> clockIcon = HugeIcons.strokeRoundedClock01;
 
 }

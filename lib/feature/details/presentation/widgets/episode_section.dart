@@ -18,7 +18,7 @@ class EpisodeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isLoading) {
       return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 32),
+        padding: EdgeInsets.symmetric(vertical: 24),
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -27,45 +27,27 @@ class EpisodeSection extends StatelessWidget {
 
     if (episodes.isEmpty) {
       return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 32),
+        padding: EdgeInsets.symmetric(vertical: 24),
         child: Center(
-          child: Text(
-            "No episodes available.",
-            style: TextStyle(fontSize: 16),
-          ),
+          child: Text("No episodes available."),
         ),
       );
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Episodes (${episodes.length})",
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-
-          const SizedBox(height: 16),
-
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: episodes.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 16),
-            itemBuilder: (_, index) {
-              final episode = episodes[index];
-
-              return EpisodeCard(
-                episode: episode,
-                onTap: () => onEpisodeTap?.call(episode),
-              );
-            },
-          ),
-        ],
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        itemCount: episodes.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 8),
+        itemBuilder: (_, index) {
+          return EpisodeCard(
+            episode: episodes[index],
+            onTap: () => onEpisodeTap?.call(episodes[index]),
+          );
+        },
       ),
     );
   }

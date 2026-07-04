@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_box/core/common/app_cache_network_image.dart';
+import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/details/model/details_argument.dart';
@@ -15,6 +16,7 @@ import 'package:movie_box/feature/details/presentation/widgets/details_shimmer.d
 import 'package:movie_box/feature/details/presentation/widgets/genre_chip.dart';
 import 'package:movie_box/feature/details/presentation/widgets/info_tile.dart';
 import 'package:movie_box/feature/details/presentation/widgets/overview_widget.dart';
+import 'package:movie_box/feature/details/presentation/widgets/play_button.dart';
 import 'package:movie_box/feature/details/presentation/widgets/recommendation_section.dart';
 import 'package:movie_box/feature/details/presentation/widgets/season_dropdown.dart';
 import 'package:movie_box/feature/details/presentation/widgets/episode_section.dart';
@@ -106,6 +108,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       : null),
                             onPlayTrailer: () {},
                           ),
+                         // PlayButton(text: "Watch Now", icon: AppIcons.playIcon, onTap: () {}),
                           const SizedBox(height: 90),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -197,7 +200,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 style: theme.textTheme.titleMedium,
                               ),
                             ),
-                            const SizedBox(height: 16),
+                           // const SizedBox(height: 16),
                             EpisodeSection(
                               episodes: state.episodes,
                               isLoading: state.isLoadingEpisodes,
@@ -211,7 +214,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           //const SizedBox(height: 16),
                           RecommendationSection(
                             movies: state.recommendations,
-                            onTap: (_) {},
+                            
                           ),
                           const SizedBox(height: 24),
                         ],

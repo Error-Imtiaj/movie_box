@@ -54,24 +54,23 @@ class DetailsShimmer extends StatelessWidget {
 
                         Container(
                           height: 18,
-                          width: 180,
+                          width: 140,
                           color: Colors.white,
                         ),
 
                         const SizedBox(height: 14),
 
-                        Row(
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
                           children: List.generate(
                             3,
-                            (_) => Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: Container(
-                                width: 70,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
+                            (_) => Container(
+                              width: 60,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
                               ),
                             ),
                           ),

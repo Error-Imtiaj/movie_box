@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_box/core/router/routes.dart';
+import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 import 'package:movie_box/feature/seeall/presentation/widgets/movie_grid_item.dart';
 
 class RecommendationSection extends StatelessWidget {
   final List<MovieModel> movies;
   final VoidCallback? onSeeAll;
-  final ValueChanged<MovieModel>? onTap;
 
   const RecommendationSection({
     super.key,
     required this.movies,
     this.onSeeAll,
-    this.onTap,
+  
   });
 
   @override
@@ -37,15 +39,12 @@ class RecommendationSection extends StatelessWidget {
               ),
               const Spacer(),
               if (onSeeAll != null)
-                TextButton(
-                  onPressed: onSeeAll,
-                  child: const Text("See All"),
-                ),
+                TextButton(onPressed: onSeeAll, child: const Text("See All")),
             ],
           ),
-      
+
           const SizedBox(height: 16),
-      
+
           SizedBox(
             height: 300,
             child: ListView.separated(
@@ -55,13 +54,22 @@ class RecommendationSection extends StatelessWidget {
               separatorBuilder: (_, __) => const SizedBox(width: 12),
               itemBuilder: (_, index) {
                 final movie = movies[index];
-      
+
                 return SizedBox(
                   width: 165,
                   child: MovieGridItem(
                     movie: movie,
                     heroTag: "recommend_${movie.id}",
-                    onTap: () => onTap?.call(movie),
+                    onTap: () {
+                      context.push(
+                        Routes.detailsScreen,
+                        extra: DetailsArguments(
+                          id: movie.id,
+                          mediaType: movie.mediaType ?? "movie",
+                          heroTag: "${movie.title}_${movie.id}",
+                        ),
+                      );
+                    },
                   ),
                 );
               },

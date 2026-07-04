@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/common/app_cache_network_image.dart';
 import 'package:movie_box/core/const/app_colors.dart';
+import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
+import 'package:movie_box/feature/details/presentation/widgets/play_button.dart';
 
 class DetailsHeader extends StatelessWidget {
   final String title;
@@ -95,43 +98,18 @@ class DetailsHeader extends StatelessWidget {
                       Text(
                         title,
                         maxLines: 2,
-                        style: theme.textTheme.headlineSmall?.copyWith(
+                        style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
 
                       const SizedBox(height: 10),
 
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: genres
-                            .map(
-                              (genre) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.textColor.withOpacity(.15),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Text(
-                                  genre,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-
-                      const SizedBox(height: 10),
-
                       Row(
                         children: [
-                          const Icon(
-                            Icons.star,
-                            color: Colors.amber,
+                          const HugeIcon(
+                            icon: AppIcons.starIcon,
+                            color: AppColors.ratingBadgeIconColor,
                             size: 18,
                           ),
 
@@ -139,17 +117,18 @@ class DetailsHeader extends StatelessWidget {
 
                           Text(
                             rating.toStringAsFixed(1),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textColorDark,
                             ),
                           ),
 
                           const SizedBox(width: 14),
 
-                          const Icon(
-                            Icons.calendar_today,
-                            size: 15,
+                          const HugeIcon(
+                            icon: AppIcons.calenderIcon,
                             color: Colors.grey,
+                            size: 15,
                           ),
 
                           const SizedBox(width: 4),
@@ -158,27 +137,36 @@ class DetailsHeader extends StatelessWidget {
                             releaseDate.isNotEmpty
                                 ? releaseDate.substring(0, 4)
                                 : "-",
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.textColorDark,
+                            ),
                           ),
 
                           if (runtime != null) ...[
                             const SizedBox(width: 14),
-                            const Icon(
-                              Icons.schedule,
-                              size: 15,
+                            const HugeIcon(
+                              icon: AppIcons.clockIcon,
                               color: Colors.grey,
+                              size: 15,
                             ),
                             const SizedBox(width: 4),
-                            Text(runtime!),
+                            Text(
+                              runtime!,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textColorDark,
+                              ),
+                            ),
                           ],
                         ],
                       ),
 
                       const SizedBox(height: 12),
-
-                      FilledButton.icon(
-                        onPressed: onPlayTrailer,
-                        icon: const Icon(Icons.play_arrow),
-                        label: const Text("Watch Trailer"),
+                      PlayButton(
+                        text: "Watch Trailer",
+                        onTap: onPlayTrailer,
+                        icon: AppIcons.playIcon,
                       ),
                     ],
                   ),
