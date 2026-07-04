@@ -37,4 +37,19 @@ class AppStrings {
   static const String onboardingScreen = '/onboarding';
   static const String homeScreen = '/home';
   static const String navigationScreen = '/navigation';
+  static const String seeAllScreen = '/see-all';
+
+  // MOVIE CATEGORY
+  static const String trendingMovies = 'Trending Movies';
+  static const String popularMovies = 'Popular Movies';
+  static const String topRatedMovies = 'Top Rated Movies';
+  static const String trendingTV = 'Trending TV';
+  static const String popularTV = 'Popular TV';
+  static const String topRatedTV = 'Top Rated TV';
+  static const String trendingAll = 'Trending'; // Added new category for trending all
+
+  // TMDB CONSTANTS
+  static const String tmdbApiUrl = 'TMDB_API_URL';
+  static const String tmdbTrendingImageUrl = "https://image.tmdb.org/t/p/w780";
+   static const String tmdbMovieImageUrl = "https://image.tmdb.org/t/p/w500";
 }

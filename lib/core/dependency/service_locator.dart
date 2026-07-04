@@ -6,6 +6,7 @@ import 'package:movie_box/core/services/network/services/dio_client.dart';
 import 'package:movie_box/core/services/network/services/network_service.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/home/repository/home_repository.dart';
+import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +21,7 @@ class ServiceLocator {
     // REGISTER ASYNC SINGLETON MEANS THE INSTANCE WILL BE CREATED ASYNCHRONOUSLY WHEN IT IS FIRST REQUESTED AND THE SAME INSTANCE WILL BE USED EACH TIME IT IS REQUESTED
     // REGISTER ASYNC LAZY SINGLETON MEANS THE INSTANCE WILL BE CREATED ASYNCHRONOUSLY WHEN IT IS FIRST REQUESTED AND THE SAME INSTANCE WILL BE USED EACH TIME IT IS REQUESTED
     // REGISTER ASYNC FACTORY MEANS A NEW INSTANCE WILL BE CREATED ASYNCHRONOUSLY EACH TIME IT IS REQUESTED
-   
+
     final prefs = await SharedPreferences.getInstance();
     getIt.registerSingleton<NetworkService>(NetworkService());
     getIt.registerSingleton<NetworkBloc>(NetworkBloc(getIt<NetworkService>()));
@@ -42,5 +43,8 @@ class ServiceLocator {
     getIt.registerFactory(
       () => HomeBloc(getIt<HomeRepository>(), getIt<LocalStorageService>()),
     );
+
+    // SEE ALL BLOC
+    getIt.registerFactory(() => SeeAllBloc(getIt<HomeRepository>()));
   }
 }

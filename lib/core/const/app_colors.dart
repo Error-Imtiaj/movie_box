@@ -54,4 +54,9 @@ class AppColors {
   static const Color navigationBarUnselectedItemColor = Colors.white70;
  // static const Color navigationBarIndicatorColor = Colors.white;
   static const Color navigationFloatingDockedColor = Color(0xffCB2957);
+
+  // HOME SCREEN COLORS
+  static const Color homeScreenSeeAllBackgroundColor = Color(0xFF001F3D);
+  static const Color homeScreenSeeAllIconColor = Colors.white;
+  static const Color homeScreenSeeAllTextColor = Colors.white;
 }

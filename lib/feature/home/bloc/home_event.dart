@@ -9,3 +9,12 @@ class SubmitApiKeyEvent extends HomeEvent {
   SubmitApiKeyEvent(this.apiKey);
 
 }
+
+
+
+class LoadHomeEvent extends HomeEvent {}
+class LoadMoreMoviesEvent extends HomeEvent {
+  final MovieCategory category;
+
+  LoadMoreMoviesEvent(this.category);
+}
