@@ -50,7 +50,7 @@ class AppSize {
   static const double mediaBadgeBorderRadius = 8.0;
   static const double movieCardBoxWidth = 155.0;
   static const double movieCardBoxRadius = 18.0;
-  static const double movieListBoxHeight = 285.0;
+  static const double movieListBoxHeight = 250.0;
   static const double movieListBoxHorizontalPadding = 16.0;
   static const double moviePosterWidth = 150.0;
   static const double moviePosterHeight = 220.0;

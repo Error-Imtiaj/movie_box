@@ -26,17 +26,11 @@ class SeeAllBloc extends Bloc<SeeAllEvent, SeeAllState> {
     Emitter<SeeAllState> emit,
   ) async {
     emit(SeeAllLoading());
-
     category = event.category;
-
     page = 1;
-
     movies.clear();
-
     final response = await repository.getMovies(category, page: page);
-
     movies.addAll(response.results);
-
     emit(
       SeeAllLoaded(
         movies: List.from(movies),
@@ -50,21 +44,17 @@ class SeeAllBloc extends Bloc<SeeAllEvent, SeeAllState> {
     Emitter<SeeAllState> emit,
   ) async {
     if (state is! SeeAllLoaded) return;
-
     final current = state as SeeAllLoaded;
-
-    if (current.hasReachedMax) return;
-
+    if (current.isLoadingMore || current.hasReachedMax) return;
+    emit(current.copyWith(isLoadingMore: true));
+    final response = await repository.getMovies(category, page: page + 1);
     page++;
-
-    final response = await repository.getMovies(category, page: page);
-
     movies.addAll(response.results);
-
     emit(
       current.copyWith(
         movies: List.from(movies),
         hasReachedMax: page >= response.totalPages,
+        isLoadingMore: false,
       ),
     );
   }

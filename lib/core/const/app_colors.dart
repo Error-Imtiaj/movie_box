@@ -69,4 +69,8 @@ class AppColors {
   // MOVIE POSTER OVERLAY COLOR 
   static const Color black26 = Colors.black26;
   static const Color black87 = Colors.black87;
+
+  // SHIMMER COLOR 
+  static const Color shimmerBaseColor = Color.fromARGB(255, 153, 153, 153);
+  static const Color shimmerHighlightColor = Color(0xFFF5F5F5);
 }

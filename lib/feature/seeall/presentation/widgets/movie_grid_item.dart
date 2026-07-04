@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/common/app_cache_network_image.dart';
+import 'package:movie_box/core/const/app_colors.dart';
+import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
+import 'package:movie_box/feature/home/presentation/widgets/movie_meta_row.dart';
 
 class MovieGridItem extends StatelessWidget {
   final MovieModel movie;
@@ -71,9 +75,9 @@ class MovieGridItem extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
-                            Icons.star_rounded,
-                            color: Colors.amber,
+                           HugeIcon(
+                            icon : AppIcons.starIcon,
+                            color: AppColors.ratingBadgeIconColor,
                             size: 14,
                           ),
                           const SizedBox(width: 3),
@@ -122,7 +126,7 @@ class MovieGridItem extends StatelessWidget {
 
           Text(
             movie.title,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
@@ -130,11 +134,8 @@ class MovieGridItem extends StatelessWidget {
           ),
 
           const SizedBox(height: 4),
-
-          Text(
-            movie.releaseDate,
-            style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey),
-          ),
+          MovieMetaRow(movie: movie),
+         
         ],
       ),
     );

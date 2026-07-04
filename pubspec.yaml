@@ -51,6 +51,7 @@ dependencies:
   url_launcher: ^6.3.2
   flutter_dotenv: ^6.0.1
   carousel_slider: ^5.1.2
+  shimmer: ^3.0.0
  
 
 dev_dependencies:
