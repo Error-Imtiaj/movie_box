@@ -11,6 +11,7 @@ class AppColors {
   /// Primary text color.
   static const Color textColor = Color(0xFF001F3D);
   static const Color textColorLight = Colors.white70;
+  static const Color textColorDark = Colors.black87;
 
   /// Primary buttons, chips, selected states.
   static const Color buttonBackgroundColor = Color(0xFFF7B980);
@@ -54,4 +55,23 @@ class AppColors {
   static const Color navigationBarUnselectedItemColor = Colors.white70;
  // static const Color navigationBarIndicatorColor = Colors.white;
   static const Color navigationFloatingDockedColor = Color(0xffCB2957);
+
+  // HOME SCREEN COLORS
+  static const Color homeScreenSeeAllBackgroundColor = Color(0xFF001F3D);
+  static const Color homeScreenSeeAllIconColor = Colors.white;
+  static const Color homeScreenSeeAllTextColor = Colors.white;
+  static const Color movieCardSubtitleColor = Color(0xFF9E9E9E);
+  static const Color mediaBadgePurpleColor = Colors.deepPurple;
+  static const Color mediaBadgeRedColor = Colors.redAccent;
+  static const Color mediaBadgeTextColor = Colors.white;
+  static const Color ratingBadgeIconColor = Color(0xFFF7B980);
+  static const Color ratingBadgeTextColor = Colors.white;
+
+  // MOVIE POSTER OVERLAY COLOR 
+  static const Color black26 = Colors.black26;
+  static const Color black87 = Colors.black87;
+
+  // SHIMMER COLOR 
+  static const Color shimmerBaseColor = Color.fromARGB(255, 153, 153, 153);
+  static const Color shimmerHighlightColor = Color(0xFFF5F5F5);
 }

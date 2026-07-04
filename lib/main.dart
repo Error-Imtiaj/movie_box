@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:movie_box/bloc_observer.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
@@ -10,6 +11,8 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: WidgetsBinding.instance);
 
   Bloc.observer = AppBlocObserver();
+  await dotenv.load(fileName: ".env");
+  print(dotenv.env);
   await ServiceLocator.init();
   debugPrint('Observer: ${Bloc.observer.runtimeType}');
 

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppStrings {
   // App Strings
   // APP NAME
@@ -19,9 +21,9 @@ class AppStrings {
       'Create your own watchlist and start your entertainment journey.';
   static const String skip = 'Skip';
   static const String next = 'Next';
-  static const String watchNow = 'Watch Now'; 
+  static const String watchNow = 'Watch Now';
 
-  // TMDB SCREEN 
+  // TMDB SCREEN
   static const String tmdbTitle = 'Connect Your TMDB Key';
   static const String tmdbDescription =
       'Movie Box uses The Movie Database API to fetch real movie and TV data. A free API key is required.';
@@ -37,4 +39,35 @@ class AppStrings {
   static const String onboardingScreen = '/onboarding';
   static const String homeScreen = '/home';
   static const String navigationScreen = '/navigation';
+  static const String seeAllScreen = '/see-all';
+  static const String detailsScreen = '/details';
+  static const String trailerPlayerScreen = '/trailer-player';
+
+  // MOVIE CATEGORY
+  static const String trendingMovies = 'Trending Movies';
+  static const String popularMovies = 'Popular Movies';
+  static const String topRatedMovies = 'Top Rated Movies';
+  static const String trendingTV = 'Trending TV';
+  static const String popularTV = 'Popular TV';
+  static const String topRatedTV = 'Top Rated TV';
+  static const String trendingAll =
+      'Trending'; // Added new category for trending all
+
+  // TMDB CONSTANTS
+  static const String tmdbApiUrl = 'TMDB_API_URL';
+  static const String tmdbTrendingImageUrl = "https://image.tmdb.org/t/p/w780";
+  static const String tmdbMovieImageUrl = "https://image.tmdb.org/t/p/w500";
+  static const tmdbProfileImageUrl = "https://image.tmdb.org/t/p/w185";
+  static const String tmdbDetailsImageUrl = "https://image.tmdb.org/t/p/original";
+
+  // HOME SCREEN
+  static const String seeAll = 'See All';
+  static const String noMoviesFound = 'No movies found.';
+  static const String noTVShowsFound = 'No TV shows found.';
+  static const String noTrendingFound = 'No trending content found.';
+  static const String noPopularFound = 'No popular content found.';
+  static const String noTopRatedFound = 'No top rated content found.';
+  static const String smalltV = 'tv';
+  static const String tvSeries = 'TV Series';
+  static const String movie = 'Movie';
 }
