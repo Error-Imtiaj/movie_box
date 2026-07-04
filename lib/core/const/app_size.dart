@@ -42,7 +42,18 @@ class AppSize {
   static const double navigationBarIndicatorWidth = 24.0;
   static const double navigationBarNotchMargin = 10.0;
 
-
-
+  // MOVIE META ROW CONSTANTS
+  static const double movieCalenderIconSize = 14.0;
+  static const double mediaFontSize = 11.0;
+  static const double mediaBadgeHorizontalPadding = 10.0;
+  static const double mediaBadgeVerticalPadding = 5.0;
+  static const double mediaBadgeBorderRadius = 8.0;
+  static const double movieCardBoxWidth = 155.0;
+  static const double movieCardBoxRadius = 18.0;
+  static const double movieListBoxHeight = 285.0;
+  static const double movieListBoxHorizontalPadding = 16.0;
+  static const double moviePosterWidth = 150.0;
+  static const double moviePosterHeight = 220.0;
+  static const double moviePosterBorderRadius = 18.0;
 
 }

@@ -59,4 +59,14 @@ class AppColors {
   static const Color homeScreenSeeAllBackgroundColor = Color(0xFF001F3D);
   static const Color homeScreenSeeAllIconColor = Colors.white;
   static const Color homeScreenSeeAllTextColor = Colors.white;
+  static const Color movieCardSubtitleColor = Color(0xFF9E9E9E);
+  static const Color mediaBadgePurpleColor = Colors.deepPurple;
+  static const Color mediaBadgeRedColor = Colors.redAccent;
+  static const Color mediaBadgeTextColor = Colors.white;
+  static const Color ratingBadgeIconColor = Color(0xFFF7B980);
+  static const Color ratingBadgeTextColor = Colors.white;
+
+  // MOVIE POSTER OVERLAY COLOR 
+  static const Color black26 = Colors.black26;
+  static const Color black87 = Colors.black87;
 }

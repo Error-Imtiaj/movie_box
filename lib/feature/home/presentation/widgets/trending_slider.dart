@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/common/app_cache_network_image.dart';
+import 'package:movie_box/core/const/app_colors.dart';
+import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 
@@ -102,12 +105,12 @@ class TrendingSlider extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: movie.mediaType == "tv"
-                              ? Colors.deepPurple
-                              : Colors.redAccent,
+                              ? AppColors.mediaBadgePurpleColor
+                              : AppColors.mediaBadgeRedColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          movie.mediaType == "tv" ? "TV SERIES" : "MOVIE",
+                          movie.mediaType == AppStrings.smalltV ? AppStrings.tvSeries : AppStrings.movie,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -118,9 +121,9 @@ class TrendingSlider extends StatelessWidget {
 
                       const SizedBox(width: 10),
 
-                      const Icon(
-                        Icons.star_rounded,
-                        color: Colors.amber,
+                       HugeIcon(
+                       icon: AppIcons.starIcon,
+                        color: AppColors.ratingBadgeIconColor,
                         size: 18,
                       ),
 
@@ -136,8 +139,8 @@ class TrendingSlider extends StatelessWidget {
 
                       const SizedBox(width: 10),
 
-                      const Icon(
-                        Icons.calendar_today_rounded,
+                      HugeIcon(
+                        icon: AppIcons.calenderIcon,
                         color: Colors.white70,
                         size: 15,
                       ),
