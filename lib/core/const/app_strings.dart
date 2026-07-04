@@ -41,6 +41,7 @@ class AppStrings {
   static const String navigationScreen = '/navigation';
   static const String seeAllScreen = '/see-all';
   static const String detailsScreen = '/details';
+  static const String trailerPlayerScreen = '/trailer-player';
 
   // MOVIE CATEGORY
   static const String trendingMovies = 'Trending Movies';

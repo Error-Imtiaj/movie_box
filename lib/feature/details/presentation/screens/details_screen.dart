@@ -5,6 +5,7 @@ import 'package:movie_box/core/common/app_cache_network_image.dart';
 import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
+import 'package:movie_box/feature/details/model/TRAILER_PLAYER_ARGUMENT.DART';
 import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/details/model/genre_model.dart';
 import 'package:movie_box/feature/details/model/movie_details_model.dart';
@@ -20,6 +21,9 @@ import 'package:movie_box/feature/details/presentation/widgets/play_button.dart'
 import 'package:movie_box/feature/details/presentation/widgets/recommendation_section.dart';
 import 'package:movie_box/feature/details/presentation/widgets/season_dropdown.dart';
 import 'package:movie_box/feature/details/presentation/widgets/episode_section.dart';
+import 'package:movie_box/feature/details/presentation/screens/trailer_player_screen.dart';
+import 'package:movie_box/core/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class DetailsScreen extends StatefulWidget {
   final DetailsArguments arguments;
@@ -93,23 +97,96 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             overview: details.overview,
                             rating: details.voteAverage,
                             releaseDate: isMovie
-                                ? (movie!.releaseDate ?? '')
+                                ? (movie!.releaseDate)
                                 : tv!.firstAirDate,
                             genres: (isMovie ? movie!.genres : tv!.genres)
                                 .map((e) => e.name)
                                 .toList(),
                             isTv: !isMovie,
                             runtime: isMovie
-                                ? (movie!.runtime != null
-                                      ? '${movie.runtime} min'
-                                      : null)
+                                ? ('${movie?.runtime} min')
                                 : (tv!.episodeRunTime.isNotEmpty
                                       ? '${tv.episodeRunTime.first} min'
                                       : null),
-                            onPlayTrailer: () {},
+                            onPlayTrailer: () {
+                              // debugPrint(
+                              //   "Videos loaded: ${state.videos.length}",
+                              // );
+                              // print("Play trailer button pressed");
+                              // print(
+                              //   "Videos: ${state.videos} and isempty: ${state.videos.isEmpty}",
+                              // );
+                              // if (state.videos.isEmpty) return;
+
+                              // final trailer = state.videos.firstWhere(
+                              //   (video) =>
+                              //       video.site == "YouTube" &&
+                              //       video.type == "Trailer",
+                              //   orElse: () => state.videos.first,
+                              // );
+
+                              // context.push(
+                              //   Routes.trailerPlayerScreen,
+                              //   extra: TrailerPlayerArguments(
+                              //     youtubeKey: trailer.key,
+                              //     title: isMovie ? movie!.title : tv!.name,
+                              //   ),
+                              // );
+
+                              debugPrint("BUTTON PRESSED");
+                            },
                           ),
-                         // PlayButton(text: "Watch Now", icon: AppIcons.playIcon, onTap: () {}),
+                          //    PlayButton(text: "Watch Now", icon: AppIcons.playIcon, onTap: () {}),
                           const SizedBox(height: 90),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                            ),
+                            child: Row(
+                              children: [
+                                PlayButton(
+                                  text: "Play Now",
+                                  icon: AppIcons.playIcon,
+                                  onTap: () {},
+                                ),
+                                const SizedBox(width: 12),
+                                PlayButton(
+                                  text: "Watch Trailer",
+                                  icon: AppIcons.playIcon,
+                                  onTap: () {
+                                    debugPrint(
+                                      "Videos loaded: ${state.videos.length}",
+                                    );
+                                    print("Play trailer button pressed");
+                                    print(
+                                      "Videos: ${state.videos} and isempty: ${state.videos.isEmpty}",
+                                    );
+                                    if (state.videos.isEmpty) return;
+
+                                    final trailer = state.videos.firstWhere(
+                                      (video) =>
+                                          video.site == "YouTube" &&
+                                          video.type == "Trailer",
+                                      orElse: () => state.videos.first,
+                                    );
+
+                                    context.push(
+                                      Routes.trailerPlayerScreen,
+                                      extra: TrailerPlayerArguments(
+                                        youtubeKey: trailer.key,
+                                        title: isMovie
+                                            ? movie!.title
+                                            : tv!.name,
+                                      ),
+                                    );
+
+                                    debugPrint("BUTTON PRESSED");
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Wrap(
@@ -200,7 +277,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 style: theme.textTheme.titleMedium,
                               ),
                             ),
-                           // const SizedBox(height: 16),
+                            // const SizedBox(height: 16),
                             EpisodeSection(
                               episodes: state.episodes,
                               isLoading: state.isLoadingEpisodes,
@@ -212,10 +289,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           //   style: theme.textTheme.titleMedium,
                           // ),
                           //const SizedBox(height: 16),
-                          RecommendationSection(
-                            movies: state.recommendations,
-                            
-                          ),
+                          RecommendationSection(movies: state.recommendations),
                           const SizedBox(height: 24),
                         ],
                       ),

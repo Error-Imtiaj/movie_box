@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/router/routes.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
+import 'package:movie_box/feature/details/model/TRAILER_PLAYER_ARGUMENT.DART';
 import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/details/presentation/screens/details_screen.dart';
+import 'package:movie_box/feature/details/presentation/screens/trailer_player_screen.dart';
 import 'package:movie_box/feature/home/presentation/screen/home_screen.dart';
 import 'package:movie_box/feature/navigator/presentation/screens/navigator_screen.dart';
 import 'package:movie_box/feature/onboarding/presentation/screen/onboarding.dart';
@@ -55,24 +57,29 @@ final routerNavigation = GoRouter(
     ),
 
     GoRoute(
-  path: Routes.detailsScreen,
-  name: Routes.detailsScreen,
-  builder: (context, state) {
-    final extra = state.extra as DetailsArguments;
+      path: Routes.detailsScreen,
+      name: Routes.detailsScreen,
+      builder: (context, state) {
+        final extra = state.extra as DetailsArguments;
 
-    return BlocProvider(
-      create: (_) => getIt<DetailsBloc>()
-        ..add(
-          LoadDetailsEvent(
-            id: extra.id,
-            mediaType: extra.mediaType,
-          ),
-        ),
-      child: DetailsScreen(
-        arguments: extra,
-      ),
-    );
-  },
-),
+        return BlocProvider(
+          create: (_) => getIt<DetailsBloc>()
+            ..add(LoadDetailsEvent(id: extra.id, mediaType: extra.mediaType)),
+          child: DetailsScreen(arguments: extra),
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.trailerPlayerScreen,
+      name: Routes.trailerPlayerScreen,
+      builder: (context, state) {
+        final args = state.extra as TrailerPlayerArguments;
+
+        return TrailerPlayerScreen(
+          youtubeKey: args.youtubeKey,
+          title: args.title,
+        );
+      },
+    ),
   ],
 );

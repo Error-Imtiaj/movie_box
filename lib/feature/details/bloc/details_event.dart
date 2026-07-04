@@ -1,6 +1,8 @@
 part of 'details_bloc.dart';
 
-sealed class DetailsEvent {}
+sealed class DetailsEvent {
+  const DetailsEvent();
+}
 
 class LoadDetailsEvent extends DetailsEvent {
 
@@ -8,13 +10,10 @@ class LoadDetailsEvent extends DetailsEvent {
 
   final String mediaType;
 
-  LoadDetailsEvent({
-
+  const LoadDetailsEvent({
     required this.id,
-
     required this.mediaType,
-
-  });
+  }) : super();
 
 }
 
@@ -22,6 +21,6 @@ class ChangeSeasonEvent extends DetailsEvent {
 
   final int season;
 
-  ChangeSeasonEvent(this.season);
+  const ChangeSeasonEvent(this.season) : super();
 
 }

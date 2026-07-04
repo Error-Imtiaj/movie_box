@@ -12,50 +12,53 @@ class PlayButton extends StatelessWidget {
   const PlayButton({
     super.key,
     required this.text,
+    required this.icon,
     this.onTap,
     this.outlined = false,
-    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
 
-    return SizedBox(
-      height: 50,
-      child: ElevatedButton.icon(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          backgroundColor:
-              outlined ? Colors.transparent : AppColors.homeScreenSeeAllBackgroundColor,
-          foregroundColor:
-              outlined ? primary : Colors.white,
-          side: outlined
-              ? BorderSide(
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        height: 50,
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        decoration: BoxDecoration(
+          color: outlined
+              ? Colors.transparent
+              : AppColors.homeScreenSeeAllBackgroundColor,
+          borderRadius: BorderRadius.circular(14),
+          border: outlined
+              ? Border.all(
                   color: primary.withOpacity(.4),
                 )
-              : BorderSide.none,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
+              : null,
         ),
-        icon: icon != null
-            ? HugeIcon(
-                icon :icon,
-                size: 20,
-              )
-            : HugeIcon(
-                icon: AppIcons.playIcon,
-                size: 20,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            HugeIcon(
+              icon: icon,
+              size: 20,
+              color: outlined ? primary : Colors.white,
+            ),
+
+            const SizedBox(width: 10),
+
+            Text(
+              text,
+              style: TextStyle(
                 color: outlined ? primary : Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
               ),
-        label: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-          ),
+            ),
+          ],
         ),
       ),
     );

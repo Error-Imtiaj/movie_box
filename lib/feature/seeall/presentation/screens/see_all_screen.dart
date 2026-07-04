@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_box/core/router/routes.dart';
+import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/seeall/model/see_all_aurgument_model.dart';
 import 'package:movie_box/feature/seeall/presentation/widgets/movie_grid_item.dart';
@@ -42,7 +45,7 @@ class _SeeAllScreenState extends State<SeeAllScreen> {
             if (state is SeeAllLoading) {
               return MovieGridLoading();
             }
-        
+
             if (state is SeeAllLoaded) {
               return GridView.builder(
                 controller: controller,
@@ -58,12 +61,24 @@ class _SeeAllScreenState extends State<SeeAllScreen> {
                   if (index >= state.movies.length) {
                     return const MovieGridSkeleton();
                   }
-        
-                  return MovieGridItem(movie: state.movies[index]);
+
+                  return MovieGridItem(
+                    movie: state.movies[index],
+                    onTap: () {
+                      context.push(
+                        Routes.detailsScreen,
+                        extra: DetailsArguments(
+                          id: state.movies[index].id,
+                          mediaType: state.movies[index].mediaType ?? "movie",
+                          heroTag: "${state.movies[index].title}_${state.movies[index].id}",
+                        ),
+                      );
+                    },
+                  );
                 },
               );
             }
-        
+
             return const SizedBox();
           },
         ),

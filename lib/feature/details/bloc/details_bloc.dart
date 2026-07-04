@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_box/feature/details/model/cast_model.dart';
 import 'package:movie_box/feature/details/model/episode_model.dart';
+import 'package:movie_box/feature/details/model/video_model.dart';
 import 'package:movie_box/feature/details/repository/detail_repository.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 import 'package:movie_box/feature/home/model/movie_response_model.dart';
@@ -34,6 +35,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           repository.getMovieDetails(_id),
           repository.getMovieCast(_id),
           repository.getMovieRecommendations(_id),
+          repository.getMovieVideos(_id),
         ]);
 
         emit(
@@ -42,6 +44,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
             casts: results[1] as List<CastModel>,
             recommendations: results[2] as List<MovieModel>,
             episodes: const [],
+            videos: results[3] as List<VideoModel>,
             selectedSeason: 0,
             isLoadingEpisodes: false,
           ),
@@ -52,6 +55,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           repository.getTvCast(_id),
           repository.getTvRecommendations(_id),
           repository.getSeasonEpisodes(tvId: _id, seasonNumber: 1),
+          repository.getTvVideos(_id),
         ]);
 
         emit(
@@ -60,6 +64,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
             casts: results[1] as List<CastModel>,
             recommendations: results[2] as List<MovieModel>,
             episodes: results[3] as List<EpisodeModel>,
+            videos: results[4] as List<VideoModel>,
             selectedSeason: 1,
             isLoadingEpisodes: false,
           ),

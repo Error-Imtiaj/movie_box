@@ -15,6 +15,8 @@ class DetailsLoaded extends DetailsState {
 
   final List<EpisodeModel> episodes;
 
+  final List<VideoModel> videos;
+
   final int selectedSeason;
 
   final bool isLoadingEpisodes;
@@ -24,6 +26,7 @@ class DetailsLoaded extends DetailsState {
     required this.casts,
     required this.recommendations,
     required this.episodes,
+    required this.videos,
     required this.selectedSeason,
     this.isLoadingEpisodes = false,
   });
@@ -33,6 +36,7 @@ class DetailsLoaded extends DetailsState {
     List<CastModel>? casts,
     List<MovieModel>? recommendations,
     List<EpisodeModel>? episodes,
+    List<VideoModel>? videos,
     int? selectedSeason,
     bool? isLoadingEpisodes,
   }) {
@@ -41,6 +45,7 @@ class DetailsLoaded extends DetailsState {
       casts: casts ?? this.casts,
       recommendations: recommendations ?? this.recommendations,
       episodes: episodes ?? this.episodes,
+      videos: videos ?? this.videos,
       selectedSeason: selectedSeason ?? this.selectedSeason,
       isLoadingEpisodes:
           isLoadingEpisodes ?? this.isLoadingEpisodes,

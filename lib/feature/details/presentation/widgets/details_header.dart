@@ -163,11 +163,11 @@ class DetailsHeader extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 12),
-                      PlayButton(
-                        text: "Watch Trailer",
-                        onTap: onPlayTrailer,
-                        icon: AppIcons.playIcon,
-                      ),
+                      // PlayButton(
+                      //   text: "Watch Trailer",
+                      //   onTap: onPlayTrailer,
+                      //   icon: AppIcons.playIcon,
+                      // ),
                     ],
                   ),
                 ),

@@ -52,6 +52,7 @@ dependencies:
   flutter_dotenv: ^6.0.1
   carousel_slider: ^5.1.2
   shimmer: ^3.0.0
+  youtube_player_iframe: ^6.0.2
  
 
 dev_dependencies:
