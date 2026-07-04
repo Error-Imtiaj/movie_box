@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_box/core/common/app_cache_network_image.dart';
 import 'package:movie_box/core/const/app_icons.dart';
-import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
-import 'package:movie_box/feature/details/model/TRAILER_PLAYER_ARGUMENT.DART';
 import 'package:movie_box/feature/details/model/details_argument.dart';
-import 'package:movie_box/feature/details/model/genre_model.dart';
 import 'package:movie_box/feature/details/model/movie_details_model.dart';
 import 'package:movie_box/feature/details/model/tv_details_model.dart';
 import 'package:movie_box/feature/details/model/season_model.dart';
@@ -21,9 +17,9 @@ import 'package:movie_box/feature/details/presentation/widgets/play_button.dart'
 import 'package:movie_box/feature/details/presentation/widgets/recommendation_section.dart';
 import 'package:movie_box/feature/details/presentation/widgets/season_dropdown.dart';
 import 'package:movie_box/feature/details/presentation/widgets/episode_section.dart';
-import 'package:movie_box/feature/details/presentation/screens/trailer_player_screen.dart';
 import 'package:movie_box/core/router/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_box/feature/details/presentation/widgets/trailer_dialog.dart';
 
 class DetailsScreen extends StatefulWidget {
   final DetailsArguments arguments;
@@ -170,9 +166,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       orElse: () => state.videos.first,
                                     );
 
-                                    context.push(
-                                      Routes.trailerPlayerScreen,
-                                      extra: TrailerPlayerArguments(
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      builder: (_) => TrailerDialog(
                                         youtubeKey: trailer.key,
                                         title: isMovie
                                             ? movie!.title

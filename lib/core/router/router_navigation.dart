@@ -7,7 +7,6 @@ import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/details/model/TRAILER_PLAYER_ARGUMENT.DART';
 import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/details/presentation/screens/details_screen.dart';
-import 'package:movie_box/feature/details/presentation/screens/trailer_player_screen.dart';
 import 'package:movie_box/feature/home/presentation/screen/home_screen.dart';
 import 'package:movie_box/feature/navigator/presentation/screens/navigator_screen.dart';
 import 'package:movie_box/feature/onboarding/presentation/screen/onboarding.dart';
@@ -69,17 +68,6 @@ final routerNavigation = GoRouter(
         );
       },
     ),
-    GoRoute(
-      path: Routes.trailerPlayerScreen,
-      name: Routes.trailerPlayerScreen,
-      builder: (context, state) {
-        final args = state.extra as TrailerPlayerArguments;
-
-        return TrailerPlayerScreen(
-          youtubeKey: args.youtubeKey,
-          title: args.title,
-        );
-      },
-    ),
+   
   ],
 );
