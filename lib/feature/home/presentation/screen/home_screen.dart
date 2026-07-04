@@ -36,25 +36,27 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ApiKeyCard(
-                    apicontroller: apiKeyController,
-                    onSubmit: () {
-                      context.read<HomeBloc>().add(
-                        SubmitApiKeyEvent(apiKeyController.text.trim()),
-                      );
-                      print('API Key: ${apiKeyController.text.trim()}');
-                    },
-                    isLoading: State is HomeLoading,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: ApiKeyCard(
+                      apicontroller: apiKeyController,
+                      onSubmit: () {
+                        context.read<HomeBloc>().add(
+                          SubmitApiKeyEvent(apiKeyController.text.trim()),
+                        );
+                        print('API Key: ${apiKeyController.text.trim()}');
+                      },
+                      isLoading: State is HomeLoading,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

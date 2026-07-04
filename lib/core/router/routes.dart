@@ -5,4 +5,5 @@ class Routes {
   static const String onboardingScreen = AppStrings.onboardingScreen;
   static const String homeScreen = AppStrings.homeScreen;
   static const String navigatorScreen = AppStrings.navigationScreen;
+  
 }

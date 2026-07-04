@@ -30,6 +30,7 @@ class ApiKeyCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(28),

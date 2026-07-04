@@ -9,7 +9,9 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_box/core/const/app_asset.dart';
 import 'package:movie_box/core/const/app_size.dart';
 import 'package:movie_box/core/const/app_strings.dart';
+import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/router/routes.dart';
+import 'package:movie_box/core/services/local_storage/services/local_storage_service.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -31,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen>
   final List<AnimationController> _controllers = [];
   final List<Animation<Offset>> _animations = [];
   late final List<String> _chars;
+  final LocalStorageService _localStorageService = getIt<LocalStorageService>();
 
   static const _directions = [
     Offset(-3, 0),
@@ -55,35 +58,19 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 1800),
     );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.5,
-      end: 1,
-    ).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: Curves.elasticOut,
-      ),
+    _scaleAnimation = Tween<double>(begin: 0.5, end: 1).animate(
+      CurvedAnimation(parent: _logoController, curve: Curves.elasticOut),
     );
 
     _fadeAnimation = Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: Curves.easeIn,
-      ),
-    );
+    ).animate(CurvedAnimation(parent: _logoController, curve: Curves.easeIn));
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, .25),
       end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: Curves.easeOut,
-      ),
-    );
+    ).animate(CurvedAnimation(parent: _logoController, curve: Curves.easeOut));
 
     _logoController.forward();
 
@@ -100,20 +87,12 @@ class _SplashScreenState extends State<SplashScreen>
       final animation = Tween<Offset>(
         begin: _directions[random.nextInt(_directions.length)],
         end: Offset.zero,
-      ).animate(
-        CurvedAnimation(
-          parent: controller,
-          curve: Curves.elasticOut,
-        ),
-      );
+      ).animate(CurvedAnimation(parent: controller, curve: Curves.elasticOut));
 
       _controllers.add(controller);
       _animations.add(animation);
 
-      Future.delayed(
-        Duration(milliseconds: i * 80),
-        controller.forward,
-      );
+      Future.delayed(Duration(milliseconds: i * 80), controller.forward);
     }
 
     context.read<SplashBloc>().add(SplashStarted());
@@ -139,7 +118,11 @@ class _SplashScreenState extends State<SplashScreen>
         }
 
         if (state is SplashNavigateToHome) {
-          context.go(Routes.homeScreen);
+          if (_localStorageService.hasApiKey) {
+            context.go(Routes.navigatorScreen);
+          } else {
+            context.go(Routes.homeScreen);
+          }
         }
       },
       child: Scaffold(
