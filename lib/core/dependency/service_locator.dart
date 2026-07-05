@@ -8,6 +8,8 @@ import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/details/repository/detail_repository.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/home/repository/home_repository.dart';
+import 'package:movie_box/feature/player/presentation/services/player_service.dart';
+import 'package:movie_box/feature/player/presentation/services/watch_progress_service.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,5 +56,15 @@ class ServiceLocator {
 
     // DETAILS BLOC
     getIt.registerFactory(() => DetailsBloc(getIt<DetailsRepository>()));
+
+    // WATCH PROGRESS SERVICE
+    getIt.registerSingleton<WatchProgressService>(
+      WatchProgressService(getIt<LocalStorageService>()),
+    );
+
+    // PLAYER SERVICE
+    getIt.registerLazySingleton<PlayerService>(
+      () => PlayerService(getIt<WatchProgressService>()),
+    );
   }
 }

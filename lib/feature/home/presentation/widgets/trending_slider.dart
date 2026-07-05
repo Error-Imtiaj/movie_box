@@ -6,9 +6,12 @@ import 'package:movie_box/core/common/app_cache_network_image.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
+import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/core/router/routes.dart';
 import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
+import 'package:movie_box/feature/player/presentation/services/player_service.dart';
+import 'package:movie_box/feature/player/presentation/services/watch_progress_service.dart';
 
 class TrendingSlider extends StatelessWidget {
   final List<MovieModel> movies;
@@ -177,7 +180,29 @@ class TrendingSlider extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          int season = 1;
+                          int episode = 1;
+
+                          if (!movie.mediaType!.contains("movie")) {
+                            final watchProgress = getIt<WatchProgressService>();
+
+                            final progress = watchProgress
+                                .getLastWatchedEpisode(tvId: movie!.id);
+
+                            if (progress != null) {
+                              season = progress['season'] as int;
+                              episode = progress['episode'] as int;
+                            }
+                          }
+                          getIt<PlayerService>().openPlayer(
+                            context,
+                            tmdbId: movie.id,
+                            isTv: !movie.mediaType!.contains("movie"),
+                            season: season,
+                            episode: episode,
+                          );
+                        },
                         icon: const Icon(Icons.play_arrow_rounded),
                         label: const Text("Watch Now"),
                       ),

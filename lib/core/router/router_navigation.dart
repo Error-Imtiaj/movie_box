@@ -13,6 +13,7 @@ import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/seeall/model/see_all_aurgument_model.dart';
 import 'package:movie_box/feature/seeall/presentation/screens/see_all_screen.dart';
 import 'package:movie_box/feature/splash/presentation/screen/splash.dart';
+import 'package:movie_box/feature/player/presentation/screens/fullscreen_player.dart';
 
 final observer = RouteObserver();
 final routerNavigation = GoRouter(
@@ -67,6 +68,17 @@ final routerNavigation = GoRouter(
         );
       },
     ),
-   
+
+    GoRoute(
+      path: Routes.fullscreenPlayerScreen,
+      name: Routes.fullscreenPlayerScreen,
+      builder: (context, state) {
+        final url = state.extra as String;
+
+        return FullscreenPlayer(
+          url: url,
+        );
+      },
+    ),
   ],
 );

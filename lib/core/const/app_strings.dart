@@ -42,6 +42,7 @@ class AppStrings {
   static const String seeAllScreen = '/see-all';
   static const String detailsScreen = '/details';
   static const String trailerPlayerScreen = '/trailer-player';
+  static const String fullscreenPlayerScreen = '/fullscreen-player';
 
   // MOVIE CATEGORY
   static const String trendingMovies = 'Trending Movies';
@@ -59,6 +60,11 @@ class AppStrings {
   static const String tmdbMovieImageUrl = "https://image.tmdb.org/t/p/w500";
   static const tmdbProfileImageUrl = "https://image.tmdb.org/t/p/w185";
   static const String tmdbDetailsImageUrl = "https://image.tmdb.org/t/p/original";
+
+  // PLAYER URLS
+  static const String playerBaseUrl = "https://www.vidking.net/embed";
+  static const String playerMovieUrl = "$playerBaseUrl/movie";
+  static const String playerTvUrl = "$playerBaseUrl/tv";
 
   // HOME SCREEN
   static const String seeAll = 'See All';

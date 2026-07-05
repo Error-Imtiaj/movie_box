@@ -16,7 +16,8 @@ class DetailsHeader extends StatelessWidget {
   final List<String> genres;
   final bool isTv;
   final String? runtime;
-  final VoidCallback? onPlayTrailer;
+  final String? tagline;
+  final String? originalLanguage;
 
   const DetailsHeader({
     super.key,
@@ -29,7 +30,8 @@ class DetailsHeader extends StatelessWidget {
     required this.genres,
     required this.isTv,
     this.runtime,
-    this.onPlayTrailer,
+    this.tagline,
+    this.originalLanguage,
   });
 
   static const backdropUrl = AppStrings.tmdbTrendingImageUrl;
@@ -103,6 +105,42 @@ class DetailsHeader extends StatelessWidget {
                         ),
                       ),
 
+                      if (tagline != null && tagline!.trim().isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          tagline!,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            // fontStyle: FontStyle.italic,
+                            // color: Colors.grey,
+                          ),
+                        ),
+                      ],
+
+                      if (originalLanguage != null &&
+                          originalLanguage!.trim().isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const HugeIcon(
+                              icon: HugeIcons.strokeRoundedLanguageCircle,
+                              size: 14,
+                              //color: Colors.grey,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              "Language: ${originalLanguage!.toUpperCase()}",
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                // color: Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+
                       const SizedBox(height: 10),
 
                       Row(
@@ -163,11 +201,6 @@ class DetailsHeader extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 12),
-                      // PlayButton(
-                      //   text: "Watch Trailer",
-                      //   onTap: onPlayTrailer,
-                      //   icon: AppIcons.playIcon,
-                      // ),
                     ],
                   ),
                 ),

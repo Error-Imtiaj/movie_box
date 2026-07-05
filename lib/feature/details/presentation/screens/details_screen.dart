@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_box/core/const/app_icons.dart';
+import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/details/model/details_argument.dart';
 import 'package:movie_box/feature/details/model/movie_details_model.dart';
@@ -20,6 +21,8 @@ import 'package:movie_box/feature/details/presentation/widgets/episode_section.d
 import 'package:movie_box/core/router/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_box/feature/details/presentation/widgets/trailer_dialog.dart';
+import 'package:movie_box/feature/player/presentation/services/player_service.dart';
+import 'package:movie_box/feature/player/presentation/services/watch_progress_service.dart';
 
 class DetailsScreen extends StatefulWidget {
   final DetailsArguments arguments;
@@ -87,6 +90,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           DetailsHeader(
+                            tagline: details.tagline,
+                            originalLanguage: details.originalLanguage,
                             title: isMovie ? movie!.title : tv!.name,
                             backdropPath: details.backdropPath,
                             posterPath: details.posterPath,
@@ -104,33 +109,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 : (tv!.episodeRunTime.isNotEmpty
                                       ? '${tv.episodeRunTime.first} min'
                                       : null),
-                            onPlayTrailer: () {
-                              // debugPrint(
-                              //   "Videos loaded: ${state.videos.length}",
-                              // );
-                              // print("Play trailer button pressed");
-                              // print(
-                              //   "Videos: ${state.videos} and isempty: ${state.videos.isEmpty}",
-                              // );
-                              // if (state.videos.isEmpty) return;
-
-                              // final trailer = state.videos.firstWhere(
-                              //   (video) =>
-                              //       video.site == "YouTube" &&
-                              //       video.type == "Trailer",
-                              //   orElse: () => state.videos.first,
-                              // );
-
-                              // context.push(
-                              //   Routes.trailerPlayerScreen,
-                              //   extra: TrailerPlayerArguments(
-                              //     youtubeKey: trailer.key,
-                              //     title: isMovie ? movie!.title : tv!.name,
-                              //   ),
-                              // );
-
-                              debugPrint("BUTTON PRESSED");
-                            },
                           ),
                           //    PlayButton(text: "Watch Now", icon: AppIcons.playIcon, onTap: () {}),
                           const SizedBox(height: 90),
@@ -143,7 +121,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 PlayButton(
                                   text: "Play Now",
                                   icon: AppIcons.playIcon,
-                                  onTap: () {},
+                                  onTap: () {
+                                    int season = 1;
+                                    int episode = 1;
+
+                                    if (!isMovie) {
+                                      final watchProgress =
+                                          getIt<WatchProgressService>();
+
+                                      final progress = watchProgress
+                                          .getLastWatchedEpisode(tvId: tv!.id);
+
+                                      if (progress != null) {
+                                        season = progress['season'] as int;
+                                        episode = progress['episode'] as int;
+                                      }
+                                    }
+                                    getIt<PlayerService>().openPlayer(
+                                      context,
+                                      tmdbId: details.id,
+                                      isTv: !isMovie,
+                                      season: season,
+                                      episode: episode,
+                                    );
+                                  },
                                 ),
                                 const SizedBox(width: 12),
                                 PlayButton(
@@ -177,7 +178,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       ),
                                     );
 
-                                    debugPrint("BUTTON PRESSED");
+                                    // debugPrint("BUTTON PRESSED");
                                   },
                                 ),
                               ],
@@ -281,12 +282,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                             // const SizedBox(height: 24),
                           ],
-                          // Text(
-                          //   'Recommendations',
-                          //   style: theme.textTheme.titleMedium,
-                          // ),
-                          //const SizedBox(height: 16),
-                          SafeArea(child: RecommendationSection(movies: state.recommendations)),
+
+                          SafeArea(
+                            child: RecommendationSection(
+                              movies: state.recommendations,
+                            ),
+                          ),
                           const SizedBox(height: 24),
                         ],
                       ),
