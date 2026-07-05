@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_box/feature/details/model/cast_model.dart';
 import 'package:movie_box/feature/details/model/episode_model.dart';
@@ -70,8 +72,12 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           ),
         );
       }
-    } catch (e) {
-      emit(DetailsError(e.toString()));
+    } on SocketException {
+      emit(DetailsError('No internet connection.'));
+    } on DioException {
+      emit(DetailsError('No internet connection.'));
+    } catch (_) {
+      emit(DetailsError('Something went wrong. Please try again.'));
     }
   }
 
@@ -86,15 +92,13 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     if (current.selectedSeason == event.season) return;
 
     emit(
-      current.copyWith(
-        selectedSeason: event.season,
-        isLoadingEpisodes: true,
-      ),
+      current.copyWith(selectedSeason: event.season, isLoadingEpisodes: true),
     );
 
     try {
       final episodes = await repository.getSeasonEpisodes(
-        tvId: _id, seasonNumber: event.season,
+        tvId: _id,
+        seasonNumber: event.season,
       );
 
       emit(
@@ -104,12 +108,12 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           isLoadingEpisodes: false,
         ),
       );
-    } catch (e) {
-      emit(
-        current.copyWith(
-          isLoadingEpisodes: false,
-        ),
-      );
+    } on SocketException {
+      emit(current.copyWith(isLoadingEpisodes: false));
+    } on DioException {
+      emit(current.copyWith(isLoadingEpisodes: false));
+    } catch (_) {
+      emit(current.copyWith(isLoadingEpisodes: false));
     }
   }
 }

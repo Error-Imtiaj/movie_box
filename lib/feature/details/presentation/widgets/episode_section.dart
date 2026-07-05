@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_box/feature/details/model/episode_model.dart';
+import 'package:movie_box/feature/details/presentation/shimmer/episode_section_shimmer.dart';
 import 'package:movie_box/feature/details/presentation/widgets/episode_card.dart';
 
 class EpisodeSection extends StatelessWidget {
@@ -17,20 +18,13 @@ class EpisodeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 24),
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const EpisodeSectionShimmer();
     }
 
     if (episodes.isEmpty) {
       return const Padding(
         padding: EdgeInsets.symmetric(vertical: 24),
-        child: Center(
-          child: Text("No episodes available."),
-        ),
+        child: Center(child: Text("No episodes available.")),
       );
     }
 

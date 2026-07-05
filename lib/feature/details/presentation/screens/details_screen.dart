@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_box/core/common/app_error_screen.dart';
 import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
@@ -353,12 +354,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ],
             );
           } else if (state is DetailsError) {
-            return Center(
-              child: Text(
-                state.message,
-                style: const TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
-              ),
+            return AppErrorScreen(
+              message: state.message,
+              onRetry: () {
+                context.read<DetailsBloc>().add(
+                  LoadDetailsEvent(
+                    id: widget.arguments.id,
+                    mediaType: widget.arguments.mediaType,
+                  ),
+                );
+              },
             );
           } else {
             return const SizedBox.shrink();

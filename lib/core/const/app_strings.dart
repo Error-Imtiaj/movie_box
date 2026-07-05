@@ -82,4 +82,14 @@ class AppStrings {
   static const String smalltV = 'tv';
   static const String tvSeries = 'TV Series';
   static const String movie = 'Movie';
+
+  // ERROR PAGE STRINGS 
+  static const String errorTitle = 'Oops! Something went wrong.';
+  static const String errorDescription =
+      'We encountered an unexpected error. Please try again later.';
+  static const String errorButtonText = 'Try Again';
+  static const String errorNoInternetTitle = 'No Internet Connection';
+  static const String errorNoInternetDescription =
+      'Please check your internet connection and try again.';
+  
 }

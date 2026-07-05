@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_box/core/common/app_error_screen.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/core/router/routes.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
+import 'package:movie_box/feature/home/presentation/shimmer/home_shimmer.dart';
 import 'package:movie_box/feature/home/presentation/widgets/movie_category.dart';
 import 'package:movie_box/feature/home/presentation/widgets/movie_section.dart';
 import 'package:movie_box/feature/home/presentation/widgets/trending_slider.dart';
@@ -50,14 +52,13 @@ class _MovieScreenState extends State<MovieScreen> {
           BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               if (state is HomeLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const HomeShimmer();
               }
 
               if (state is HomeLoaded) {
                 return CustomScrollView(
                   controller: _scrollController,
                   slivers: [
-
                     SliverToBoxAdapter(
                       child: TrendingSlider(movies: state.trendingAll.results),
                     ),
@@ -158,7 +159,12 @@ class _MovieScreenState extends State<MovieScreen> {
               }
 
               if (state is HomeError) {
-                return Center(child: Text(state.message));
+                return AppErrorScreen(
+                  message: state.message,
+                  onRetry: () {
+                    context.read<HomeBloc>().add(LoadHomeEvent());
+                  },
+                );
               }
 
               return const SizedBox();
@@ -174,14 +180,14 @@ class _MovieScreenState extends State<MovieScreen> {
               opacity: _showAppBar ? 1 : 0,
               child: AppBar(
                 elevation: 0,
-               backgroundColor: AppColors.homeScreenSeeAllBackgroundColor,
+                backgroundColor: AppColors.homeScreenSeeAllBackgroundColor,
                 centerTitle: false,
                 title: Text(
                   AppStrings.appName,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.navigationBarSelectedItemColor
-                      ),
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.navigationBarSelectedItemColor,
+                  ),
                 ),
               ),
             ),

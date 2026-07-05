@@ -26,4 +26,12 @@ class AppIcons {
   static const List<List<dynamic>> arrowDownIcon = HugeIcons.strokeRoundedArrowDown02;
   static const List<List<dynamic>> clockIcon = HugeIcons.strokeRoundedClock01;
 
+
+  // ===========================================================================
+  // ERROR SCREEN ICONS
+  // ===========================================================================
+  static const List<List<dynamic>> wifiOffIcon = HugeIcons.strokeRoundedWifiOff01;
+  static const List<List<dynamic>> alertIcon = HugeIcons.strokeRoundedAlert02;
+  static const List<List<dynamic>> reloadIcon = HugeIcons.strokeRoundedCircleArrowReload01;
+
 }

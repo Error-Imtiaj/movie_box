@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_box/core/helper/app_shimmer.dart';
 
 class AppCachedNetworkImage extends StatelessWidget {
   final String imageUrl;
@@ -27,19 +28,11 @@ class AppCachedNetworkImage extends StatelessWidget {
       imageUrl: imageUrl,
       width: width,
       height: height,
-      
+
       fit: fit,
       placeholder: (_, __) =>
           placeholder ??
-          Container(
-            color: Colors.grey.shade900,
-            alignment: Alignment.center,
-            child: const SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            ),
-          ),
+          AppShimmer(width: width, height: height, borderRadius: borderRadius),
       errorWidget: (_, __, ___) =>
           errorWidget ??
           Container(
@@ -54,10 +47,7 @@ class AppCachedNetworkImage extends StatelessWidget {
     );
 
     if (borderRadius != null) {
-      return ClipRRect(
-        borderRadius: borderRadius!,
-        child: image,
-      );
+      return ClipRRect(borderRadius: borderRadius!, child: image);
     }
 
     return image;
