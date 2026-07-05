@@ -279,6 +279,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             EpisodeSection(
                               episodes: state.episodes,
                               isLoading: state.isLoadingEpisodes,
+                              onEpisodeTap: (value) {
+                                // RESUME WATCHING FROM LAST WATCHED EPISODE
+                                // OPEN PLAYER WITH SELECTED EPISODE
+                                getIt<PlayerService>().openPlayer(
+                                  context,
+                                  tmdbId: tv.id,
+                                  isTv: true,
+                                  season: state.selectedSeason,
+                                  episode: value.episodeNumber,
+                                );
+                              },
                             ),
                             // const SizedBox(height: 24),
                           ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_size.dart';
+import 'package:movie_box/core/const/app_strings.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -30,7 +32,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.homeIcon,
-                  label: "Home",
+                  label: AppStrings.home,
                   index: 0,
                 ),
               ),
@@ -38,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.searchIcon,
-                  label: "Search",
+                  label: AppStrings.search,
                   index: 1,
                 ),
               ),
@@ -48,7 +50,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.favouriteIcon,
-                  label: "Favorite",
+                  label: AppStrings.favorite,
                   index: 3,
                 ),
               ),
@@ -56,7 +58,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.profileIcon,
-                  label: "Profile",
+                  label: AppStrings.profile,
                   index: 4,
                 ),
               ),
@@ -97,7 +99,7 @@ class BottomNavBar extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: AppSize.navigationTextSize,
+              fontSize: AppSize.navigationTextSize.sp,
               fontWeight: FontWeight.w700,
               color: selected
                   ? AppColors.navigationBarSelectedItemColor

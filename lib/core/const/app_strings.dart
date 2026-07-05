@@ -34,6 +34,12 @@ class AppStrings {
   static const String openTMDBWebsite = 'Open TMDB website';
   static const String startStreaming = 'Start Streaming';
 
+  // NAVIGATION LABELS
+  static const String home = 'Home';
+  static const String search = 'Search';
+  static const String favorite = 'Favorite';
+  static const String profile = 'Profile';
+
   // ROUTES
   static const String splashScreen = '/';
   static const String onboardingScreen = '/onboarding';
