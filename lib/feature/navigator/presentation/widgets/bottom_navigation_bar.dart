@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_icons.dart';
@@ -87,7 +88,7 @@ class BottomNavBar extends StatelessWidget {
         children: [
           HugeIcon(
             icon: icon,
-            size: AppSize.navigationBarIconSize,
+            size: AppSize.navigationBarIconSize.r,
             strokeWidth: AppSize.navigationIconStrokeWidth,
             color: selected
                 ? AppColors.navigationBarSelectedItemColor
@@ -97,7 +98,7 @@ class BottomNavBar extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: AppSize.navigationTextSize,
+              fontSize: AppSize.navigationTextSize.sp,
               fontWeight: FontWeight.w700,
               color: selected
                   ? AppColors.navigationBarSelectedItemColor
