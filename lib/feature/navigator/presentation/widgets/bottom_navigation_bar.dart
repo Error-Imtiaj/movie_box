@@ -26,7 +26,7 @@ class BottomNavBar extends StatelessWidget {
       // elevation: 12,
       child: SafeArea(
         child: SizedBox(
-          height: AppSize.navigationBarHeight,
+          height: AppSize.navigationBarHeight.h,
           child: Row(
             children: [
               Expanded(
@@ -85,6 +85,7 @@ class BottomNavBar extends StatelessWidget {
       onTap: () => onTap(index),
       borderRadius: BorderRadius.circular(50),
       child: Column(
+        mainAxisSize:   MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           HugeIcon(
@@ -95,11 +96,15 @@ class BottomNavBar extends StatelessWidget {
                 ? AppColors.navigationBarSelectedItemColor
                 : AppColors.navigationBarUnselectedItemColor,
           ),
-          const SizedBox(height: 2),
+            const SizedBox(height: 2),
           Text(
             label,
+            maxLines: 1,
+            overflow: TextOverflow.fade,
+            textScaler: TextScaler.noScaling,
             style: TextStyle(
-              fontSize: AppSize.navigationTextSize.sp,
+              fontSize: 12.sp,
+              height: 1,
               fontWeight: FontWeight.w700,
               color: selected
                   ? AppColors.navigationBarSelectedItemColor
