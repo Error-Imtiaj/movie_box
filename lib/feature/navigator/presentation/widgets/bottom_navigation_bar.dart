@@ -89,7 +89,7 @@ class BottomNavBar extends StatelessWidget {
         children: [
           HugeIcon(
             icon: icon,
-            size: AppSize.navigationBarIconSize,
+            size: AppSize.navigationBarIconSize.r,
             strokeWidth: AppSize.navigationIconStrokeWidth,
             color: selected
                 ? AppColors.navigationBarSelectedItemColor
