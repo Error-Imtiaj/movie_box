@@ -10,6 +10,8 @@ import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/home/repository/home_repository.dart';
 import 'package:movie_box/feature/player/presentation/services/player_service.dart';
 import 'package:movie_box/feature/player/presentation/services/watch_progress_service.dart';
+import 'package:movie_box/feature/search/bloc/search_bloc.dart';
+import 'package:movie_box/feature/search/repository/search_repository.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -66,5 +68,11 @@ class ServiceLocator {
     getIt.registerLazySingleton<PlayerService>(
       () => PlayerService(getIt<WatchProgressService>()),
     );
+
+    // SEARCH REPO  
+    getIt.registerLazySingleton(() => SearchRepository(getIt<Dio>()));
+
+    // SEARCH BLOC
+    getIt.registerFactory(() => SearchBloc(getIt<SearchRepository>()));
   }
 }
