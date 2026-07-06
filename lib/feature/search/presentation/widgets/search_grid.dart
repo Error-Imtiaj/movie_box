@@ -3,14 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_box/core/const/app_size.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 import 'package:movie_box/feature/home/presentation/widgets/movie_card.dart';
+import 'package:movie_box/core/const/app_colors.dart';
+import 'package:movie_box/feature/search/presentation/widgets/load_more_shimmer.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SearchGrid extends StatelessWidget {
   final List<MovieModel> movies;
+  final ScrollController controller;
+  final bool isLoadingMore;
   final ValueChanged<MovieModel>? onMovieTap;
 
   const SearchGrid({
     super.key,
+    required this.controller,
     required this.movies,
+    required this.isLoadingMore,
     this.onMovieTap,
   });
 
@@ -23,12 +30,15 @@ class SearchGrid extends StatelessWidget {
     }
 
     return GridView.builder(
+      controller: controller,
       padding: EdgeInsets.symmetric(
         horizontal: AppSize.defaultPadding.w,
         vertical: 8.h,
       ),
-      itemCount: movies.length,
-      physics: const BouncingScrollPhysics(),
+      itemCount: movies.length + (isLoadingMore ? 2 : 0),
+      physics: const AlwaysScrollableScrollPhysics(
+        parent: BouncingScrollPhysics(),
+      ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 14.w,
@@ -38,6 +48,9 @@ class SearchGrid extends StatelessWidget {
         childAspectRatio: .58,
       ),
       itemBuilder: (context, index) {
+        if (index >= movies.length) {
+          return LoadMoreShimmer();
+        }
         final movie = movies[index];
 
         return MovieCard(

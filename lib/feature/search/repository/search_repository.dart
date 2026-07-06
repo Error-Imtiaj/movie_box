@@ -6,13 +6,16 @@ class SearchRepository {
 
   SearchRepository(this._dio);
 
-  Future<List<MovieModel>> searchMovie(String query) async {
+  Future<List<MovieModel>> searchMovie({
+    required String query,
+    int page = 1,
+  }) async {
     final response = await _dio.get(
       '/search/movie',
       queryParameters: {
         'query': query,
         'include_adult': false,
-        'page': 1,
+        'page': page,
       },
     );
 
@@ -23,13 +26,16 @@ class SearchRepository {
         .toList();
   }
 
-  Future<List<MovieModel>> searchTv(String query) async {
+  Future<List<MovieModel>> searchTv({
+    required String query,
+    int page = 1,
+  }) async {
     final response = await _dio.get(
       '/search/tv',
       queryParameters: {
         'query': query,
         'include_adult': false,
-        'page': 1,
+        'page': page,
       },
     );
 
@@ -40,13 +46,16 @@ class SearchRepository {
         .toList();
   }
 
-  Future<List<MovieModel>> multiSearch(String query) async {
+  Future<List<MovieModel>> multiSearch({
+    required String query,
+    int page = 1,
+  }) async {
     final response = await _dio.get(
       '/search/multi',
       queryParameters: {
         'query': query,
         'include_adult': false,
-        'page': 1,
+        'page': page,
       },
     );
 

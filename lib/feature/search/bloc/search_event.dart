@@ -14,6 +14,10 @@ final class ClearSearch extends SearchEvent {
   const ClearSearch();
 }
 
+final class LoadMoreSearch extends SearchEvent {
+  const LoadMoreSearch();
+}
+
 final class LoadRecentSearch extends SearchEvent {
   const LoadRecentSearch();
 }
