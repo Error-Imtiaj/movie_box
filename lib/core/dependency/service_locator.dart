@@ -6,8 +6,12 @@ import 'package:movie_box/core/services/network/services/dio_client.dart';
 import 'package:movie_box/core/services/network/services/network_service.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/details/repository/detail_repository.dart';
+import 'package:movie_box/feature/favourite/bloc/favourite_bloc.dart';
+import 'package:movie_box/feature/favourite/repository/favourite_repository.dart';
+import 'package:movie_box/feature/favourite/services/favourite_storage_service.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/home/repository/home_repository.dart';
+import 'package:movie_box/feature/navigator/bloc/navigator_bloc.dart';
 import 'package:movie_box/feature/player/presentation/services/player_service.dart';
 import 'package:movie_box/feature/player/presentation/services/watch_progress_service.dart';
 import 'package:movie_box/feature/search/bloc/search_bloc.dart';
@@ -40,6 +44,9 @@ class ServiceLocator {
       SplashBloc(getIt<LocalStorageService>()),
     );
 
+    // NAVIGATOR BLOC
+    getIt.registerSingleton<NavigatorBloc>(NavigatorBloc());
+
     // DIO CLIENT
     getIt.registerLazySingleton(() => DioClient());
     getIt.registerLazySingleton(() => getIt<DioClient>().dio);
@@ -71,16 +78,27 @@ class ServiceLocator {
       () => PlayerService(getIt<WatchProgressService>()),
     );
 
-    // SEARCH REPO  
+    // SEARCH REPO
     getIt.registerLazySingleton(() => SearchRepository(getIt<Dio>()));
 
     // SEARCH BLOC
     getIt.registerFactory(() => SearchBloc(getIt<SearchRepository>()));
 
-    // SUGGEST REPO 
+    // SUGGEST REPO
     getIt.registerLazySingleton(() => SuggestRepository(getIt<Dio>()));
 
     // SUGGEST BLOC
     getIt.registerFactory(() => SuggestBloc(getIt<SuggestRepository>()));
+
+    // FAVOURITE STORAGE SERVICE
+    getIt.registerSingleton<FavouriteStorageService>(FavouriteStorageService());
+
+    // FAVOURITE REPOSITORY
+    getIt.registerSingleton<FavouriteRepository>(
+      FavouriteRepository(getIt<FavouriteStorageService>()),
+    );
+
+    // FAVOURITE BLOC
+    getIt.registerFactory(() => FavouriteBloc(getIt<FavouriteRepository>()));
   }
 }

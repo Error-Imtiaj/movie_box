@@ -6,6 +6,8 @@ import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 import 'package:movie_box/feature/home/presentation/widgets/movie_meta_row.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_box/feature/favourite/bloc/favourite_bloc.dart';
 
 class MovieGridItem extends StatelessWidget {
   final MovieModel movie;
@@ -91,6 +93,41 @@ class MovieGridItem extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                  ),
+
+                  Positioned(
+                    bottom: 10,
+                    right: 10,
+                    child: BlocBuilder<FavouriteBloc, FavouriteState>(
+                      builder: (context, state) {
+                        final isFavourite =
+                            state is FavouriteLoaded &&
+                            state.movies.any((m) => m.id == movie.id);
+
+                        return Material(
+                          color: Colors.black.withValues(alpha: .45),
+                          shape: const CircleBorder(),
+                          child: InkWell(
+                            onTap: () {
+                              context.read<FavouriteBloc>().add(
+                                    ToggleFavourite(movie),
+                                  );
+                            },
+                            customBorder: const CircleBorder(),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: HugeIcon(
+                                icon: HugeIcons.strokeRoundedFavourite,
+                                color: isFavourite
+                                    ? Colors.red
+                                    : Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
 
