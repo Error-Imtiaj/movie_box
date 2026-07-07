@@ -12,6 +12,7 @@ import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/search/bloc/search_bloc.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
+import 'package:movie_box/feature/suggest/bloc/suggest_bloc.dart';
 
 final GlobalKey<ScaffoldMessengerState> messengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -43,6 +44,7 @@ class _MovieAppState extends State<MovieApp> {
             BlocProvider(create: (_) => getIt<SeeAllBloc>()),
             BlocProvider(create: (_) => getIt<DetailsBloc>()),
             BlocProvider(create: (_) => getIt<SearchBloc>()),
+            BlocProvider(create: (_) => getIt<SuggestBloc>()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

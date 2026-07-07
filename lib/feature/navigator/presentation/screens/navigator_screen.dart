@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_icons.dart';
-import 'package:movie_box/feature/discover/presentation/screens/discover_screen.dart';
+import 'package:movie_box/feature/suggest/presentation/screens/suggest_screen.dart';
 import 'package:movie_box/feature/favourite/presentation/screens/favourite_screen.dart';
 import 'package:movie_box/feature/home/presentation/screen/movie_screen.dart';
 import 'package:movie_box/feature/navigator/presentation/widgets/bottom_navigation_bar.dart';
@@ -22,7 +22,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   final List<Widget> pages = const [
     MovieScreen(),
     SearchScreen(),
-    DiscoverScreen(),
+    SuggestScreen(),
     FavouriteScreen(),
     ProfileScreen(),
   ];

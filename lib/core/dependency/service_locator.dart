@@ -14,6 +14,8 @@ import 'package:movie_box/feature/search/bloc/search_bloc.dart';
 import 'package:movie_box/feature/search/repository/search_repository.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
+import 'package:movie_box/feature/suggest/bloc/suggest_bloc.dart';
+import 'package:movie_box/feature/suggest/repository/suggest_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
@@ -74,5 +76,11 @@ class ServiceLocator {
 
     // SEARCH BLOC
     getIt.registerFactory(() => SearchBloc(getIt<SearchRepository>()));
+
+    // SUGGEST REPO 
+    getIt.registerLazySingleton(() => SuggestRepository(getIt<Dio>()));
+
+    // SUGGEST BLOC
+    getIt.registerFactory(() => SuggestBloc(getIt<SuggestRepository>()));
   }
 }
