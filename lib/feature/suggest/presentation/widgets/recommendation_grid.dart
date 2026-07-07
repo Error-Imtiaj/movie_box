@@ -53,7 +53,7 @@ class RecommendationGrid extends StatelessWidget {
 
         return MovieCard(
           movie: movie,
-          heroTag: 'suggest_${movie.id}',
+          heroTag: 'suggest_${movie.id}_$index',
           onTap: () => onMovieTap?.call(movie),
         );
       },
