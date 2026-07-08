@@ -5,10 +5,7 @@ import 'package:movie_box/feature/profile/bloc/profile_bloc.dart';
 class ChangeApiKeyDialog extends StatefulWidget {
   final String currentApiKey;
 
-  const ChangeApiKeyDialog({
-    super.key,
-    required this.currentApiKey,
-  });
+  const ChangeApiKeyDialog({super.key, required this.currentApiKey});
 
   @override
   State<ChangeApiKeyDialog> createState() => _ChangeApiKeyDialogState();
@@ -34,29 +31,13 @@ class _ChangeApiKeyDialogState extends State<ChangeApiKeyDialog> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: (context, state) {
-        if (state.success) {
-          Navigator.pop(context);
-
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("API Key updated successfully."),
-            ),
-          );
-        }
-
-        if (state.error != null && state.error!.isNotEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.error!),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return AlertDialog(
-          title:  Text("Change TMDB API Key", style: Theme.of(context).textTheme.titleMedium,),
+          title: Text(
+            "Change TMDB API Key",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           content: SizedBox(
             width: 400,
             child: Form(
@@ -75,9 +56,7 @@ class _ChangeApiKeyDialogState extends State<ChangeApiKeyDialog> {
                       });
                     },
                     icon: Icon(
-                      _obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
                     ),
                   ),
                 ),
@@ -106,19 +85,15 @@ class _ChangeApiKeyDialogState extends State<ChangeApiKeyDialog> {
                   : () {
                       if (_formKey.currentState!.validate()) {
                         context.read<ProfileBloc>().add(
-                              SaveApiKey(
-                                _controller.text.trim(),
-                              ),
-                            );
+                          SaveApiKey(_controller.text.trim()),
+                        );
                       }
                     },
               child: state.saving
                   ? const SizedBox(
                       width: 18,
                       height: 18,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
+                      child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Text("Save"),
             ),

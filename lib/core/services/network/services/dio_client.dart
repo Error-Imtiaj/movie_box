@@ -18,12 +18,13 @@ class DioClient {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          final apiKey = getIt<LocalStorageService>().getApiKey;
+          if (!options.queryParameters.containsKey("api_key")) {
+            final apiKey = getIt<LocalStorageService>().getApiKey;
 
-          if (apiKey.isNotEmpty) {
-            options.queryParameters["api_key"] = apiKey;
+            if (apiKey.isNotEmpty) {
+              options.queryParameters["api_key"] = apiKey;
+            }
           }
-
           handler.next(options);
         },
       ),

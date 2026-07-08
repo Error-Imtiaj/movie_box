@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:movie_box/feature/profile/repository/profile_repository.dart';
 
@@ -29,19 +30,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     SaveApiKey event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(ProfileSaving(apiKey: event.apiKey));
+    debugPrint(wrapWidth: 1000, 'Saving API Key: ${event.apiKey}');
 
+    // Show loading while validating.
+    emit(ProfileSaving(apiKey: state.apiKey));
+
+    final previousApiKey = await repository.getApiKey();
     final isValid = await repository.validateApiKey(event.apiKey);
+
+    debugPrint(
+      wrapWidth: 1000,
+      'API Key Validation Result: $isValid',
+    );
 
     if (!isValid) {
       emit(
         ProfileError(
-          apiKey: event.apiKey,
+          apiKey: previousApiKey,
           message: 'Invalid TMDB API Key.',
         ),
       );
 
-      emit(ProfileLoaded(apiKey: event.apiKey));
+      emit(ProfileLoaded(apiKey: previousApiKey));
       return;
     }
 

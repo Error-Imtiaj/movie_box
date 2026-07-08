@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:movie_box/core/services/local_storage/services/local_storage_service.dart';
 
 import 'package:movie_box/feature/home/repository/home_repository.dart';
@@ -18,6 +19,7 @@ class ProfileRepository {
 
   /// Validate API Key using HomeRepository
   Future<bool> validateApiKey(String apiKey) async {
+    debugPrint("Repository received: '$apiKey'");
     return await homeRepository.checkApiKey(apiKey);
   }
 

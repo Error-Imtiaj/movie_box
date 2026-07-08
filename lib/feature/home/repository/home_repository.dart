@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:movie_box/feature/home/model/movie_response_model.dart';
 import 'package:movie_box/feature/home/presentation/widgets/movie_category.dart';
 
@@ -9,14 +10,29 @@ class HomeRepository {
 
   /// CHECK API KEY
   Future<bool> checkApiKey(String apiKey) async {
+    debugPrint("run checkApiKey");
+     debugPrint("HomeRepository received: '$apiKey'");
     try {
       final response = await dio.get(
         "/configuration",
         queryParameters: {"api_key": apiKey},
       );
-
+      debugPrint(
+        wrapWidth: 1000,
+        'API Key Validation Response: ${response.data}',
+      );
+      debugPrint(
+        wrapWidth: 1000,
+        'API Key Validation Status Code: ${response.statusCode}',
+      );
       return response.statusCode == 200;
-    } on DioException {
+    } on DioException catch (e) {
+      debugPrint("Error occurred while validating API Key");
+      debugPrint("Message: ${e.message}");
+      debugPrint("Status Code: ${e.response?.statusCode}");
+      debugPrint("Response: ${e.response?.data}");
+      debugPrint("URI: ${e.requestOptions.uri}");
+
       return false;
     }
   }

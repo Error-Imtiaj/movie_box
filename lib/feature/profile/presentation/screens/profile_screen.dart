@@ -15,14 +15,12 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<ProfileBloc>().add(LoadProfile());
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
+      appBar: AppBar(title: const Text('Profile')),
       body: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {
           if (state.success) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('API Key updated successfully.')),
+              const SnackBar(content: Text('API Key updated successfully.'), behavior: SnackBarBehavior.floating,),
             );
           }
           if (state.error != null && state.error!.isNotEmpty) {
@@ -30,6 +28,7 @@ class ProfileScreen extends StatelessWidget {
               SnackBar(
                 content: Text(state.error!),
                 backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
               ),
             );
           }
@@ -71,9 +70,9 @@ class ProfileScreen extends StatelessWidget {
                   showDivider: false,
                   onTap: () {},
                 ),
-                 SizedBox(height: 24.h),
+                SizedBox(height: 24.h),
                 const DisclaimerCard(),
-                 SizedBox(height: 140.h),
+                SizedBox(height: 140.h),
               ],
             ),
           );
