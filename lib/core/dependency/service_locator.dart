@@ -14,6 +14,8 @@ import 'package:movie_box/feature/home/repository/home_repository.dart';
 import 'package:movie_box/feature/navigator/bloc/navigator_bloc.dart';
 import 'package:movie_box/feature/player/presentation/services/player_service.dart';
 import 'package:movie_box/feature/player/presentation/services/watch_progress_service.dart';
+import 'package:movie_box/feature/profile/bloc/profile_bloc.dart';
+import 'package:movie_box/feature/profile/repository/profile_repository.dart';
 import 'package:movie_box/feature/search/bloc/search_bloc.dart';
 import 'package:movie_box/feature/search/repository/search_repository.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
@@ -100,5 +102,16 @@ class ServiceLocator {
 
     // FAVOURITE BLOC
     getIt.registerFactory(() => FavouriteBloc(getIt<FavouriteRepository>()));
+
+    // PROFILE REPO
+    getIt.registerSingleton<ProfileRepository>(
+      ProfileRepository(
+        localStorageService: getIt<LocalStorageService>(),
+        homeRepository: getIt<HomeRepository>(),
+      ),
+    );
+
+    // PROFILE BLOC
+    getIt.registerFactory(() => ProfileBloc(getIt<ProfileRepository>()));
   }
 }

@@ -11,6 +11,7 @@ import 'package:movie_box/feature/details/bloc/details_bloc.dart';
 import 'package:movie_box/feature/favourite/bloc/favourite_bloc.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
 import 'package:movie_box/feature/navigator/bloc/navigator_bloc.dart';
+import 'package:movie_box/feature/profile/bloc/profile_bloc.dart';
 import 'package:movie_box/feature/search/bloc/search_bloc.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
@@ -49,6 +50,7 @@ class _MovieAppState extends State<MovieApp> {
             BlocProvider(create: (_) => getIt<SearchBloc>()),
             BlocProvider(create: (_) => getIt<SuggestBloc>()),
             BlocProvider(create: (_) => getIt<FavouriteBloc>()),
+            BlocProvider(create: (_) => getIt<ProfileBloc>()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
