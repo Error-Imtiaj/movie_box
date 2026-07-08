@@ -8,17 +8,11 @@ class DetailsLoading extends DetailsState {}
 
 class DetailsLoaded extends DetailsState {
   final dynamic details;
-
   final List<CastModel> casts;
-
   final List<MovieModel> recommendations;
-
   final List<EpisodeModel> episodes;
-
   final List<VideoModel> videos;
-
   final int selectedSeason;
-
   final bool isLoadingEpisodes;
 
   DetailsLoaded({

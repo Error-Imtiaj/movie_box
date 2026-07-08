@@ -11,6 +11,7 @@ class TvDetailsModel {
   final String name;
   final String originalName;
   final String overview;
+  final String? tagline;
 
   final String? posterPath;
   final String? backdropPath;
@@ -80,13 +81,14 @@ class TvDetailsModel {
     required this.spokenLanguages,
     this.cast = const [],
     this.videos = const [],
-    this.episodes = const [],
+    this.episodes = const [], this.tagline,
   });
 
   factory TvDetailsModel.fromJson(Map<String, dynamic> json) {
     return TvDetailsModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? '',
+      tagline: json['tagline'] ?? '',
       originalName: json['original_name'] ?? '',
       overview: json['overview'] ?? '',
       posterPath: json['poster_path'],
@@ -135,6 +137,7 @@ class TvDetailsModel {
     return {
       'id': id,
       'name': name,
+      'tagline': tagline,
       'original_name': originalName,
       'overview': overview,
       'poster_path': posterPath,
@@ -171,6 +174,7 @@ class TvDetailsModel {
     String? firstAirDate,
     String? lastAirDate,
     String? status,
+    String? tagline,
     String? type,
     String? originalLanguage,
     double? voteAverage,
@@ -192,6 +196,7 @@ class TvDetailsModel {
     return TvDetailsModel(
       id: id ?? this.id,
       name: name ?? this.name,
+      tagline: tagline ?? this.tagline,
       originalName: originalName ?? this.originalName,
       overview: overview ?? this.overview,
       posterPath: posterPath ?? this.posterPath,

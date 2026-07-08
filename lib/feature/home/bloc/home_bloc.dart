@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -25,13 +27,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(HomeLoading());
-    final isValid = await repository.checkApiKey(event.apiKey);
-    if (isValid) {
-      await localStorage.setApiKey(event.apiKey);
-      debugPrint('API Key set: ${event.apiKey}');
-      emit(HomeApiValid());
-    } else {
-      emit(HomeApiInvalid("Invalid TMDB API Key"));
+    try {
+      final isValid = await repository.checkApiKey(event.apiKey);
+
+      if (isValid) {
+        await localStorage.setApiKey(event.apiKey);
+        debugPrint('API Key set: ${event.apiKey}');
+        emit(HomeApiValid());
+      } else {
+        emit(HomeApiInvalid('Invalid TMDB API Key'));
+      }
+    } on SocketException {
+      emit(HomeError('No internet connection.'));
+    } on DioException {
+      emit(HomeError('No internet connection.'));
+    } catch (_) {
+      emit(HomeError('Something went wrong. Please try again.'));
     }
   }
 
@@ -63,8 +74,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           trendingAll: results[6] as MovieResponseModel,
         ),
       );
-    } catch (e) {
-      emit(HomeError(e.toString()));
+    } on SocketException {
+      emit(HomeError('No internet connection.'));
+    } on DioException {
+      emit(HomeError('No internet connection.'));
+    } catch (_) {
+      emit(HomeError('Something went wrong. Please try again.'));
     }
   }
 }

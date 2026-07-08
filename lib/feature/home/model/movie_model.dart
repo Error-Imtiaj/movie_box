@@ -53,4 +53,24 @@ class MovieModel {
           json['media_type'] ?? (json.containsKey('title') ? 'movie' : 'tv'),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'original_title': originalTitle,
+      'overview': overview,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
+      'original_language': originalLanguage,
+      'release_date': releaseDate,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
+      'popularity': popularity,
+      'genre_ids': genreIds,
+      'adult': adult,
+      'video': video,
+      'media_type': mediaType,
+    };
+  }
 }

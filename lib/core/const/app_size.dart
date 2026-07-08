@@ -36,9 +36,9 @@ class AppSize {
 
   // NAVIGATION BAR
   static const double navigationBarHeight = 70.0;
-  static const double navigationBarIconSize = 27.0;
+  static const double navigationBarIconSize = 20.0;
   static const double navigationIconStrokeWidth = 2.0;
-  static const double navigationTextSize = 14.0;
+  static const double navigationTextSize = 12.0;
   static const double navigationBarIndicatorWidth = 24.0;
   static const double navigationBarNotchMargin = 10.0;
 

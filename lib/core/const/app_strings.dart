@@ -34,6 +34,12 @@ class AppStrings {
   static const String openTMDBWebsite = 'Open TMDB website';
   static const String startStreaming = 'Start Streaming';
 
+  // NAVIGATION LABELS
+  static const String home = 'Home';
+  static const String search = 'Search';
+  static const String favorite = 'Favorite';
+  static const String profile = 'Profile';
+
   // ROUTES
   static const String splashScreen = '/';
   static const String onboardingScreen = '/onboarding';
@@ -42,6 +48,7 @@ class AppStrings {
   static const String seeAllScreen = '/see-all';
   static const String detailsScreen = '/details';
   static const String trailerPlayerScreen = '/trailer-player';
+  static const String fullscreenPlayerScreen = '/fullscreen-player';
 
   // MOVIE CATEGORY
   static const String trendingMovies = 'Trending Movies';
@@ -60,6 +67,11 @@ class AppStrings {
   static const tmdbProfileImageUrl = "https://image.tmdb.org/t/p/w185";
   static const String tmdbDetailsImageUrl = "https://image.tmdb.org/t/p/original";
 
+  // PLAYER URLS
+  static const String playerBaseUrl = "https://www.vidking.net/embed";
+  static const String playerMovieUrl = "$playerBaseUrl/movie";
+  static const String playerTvUrl = "$playerBaseUrl/tv";
+
   // HOME SCREEN
   static const String seeAll = 'See All';
   static const String noMoviesFound = 'No movies found.';
@@ -70,4 +82,14 @@ class AppStrings {
   static const String smalltV = 'tv';
   static const String tvSeries = 'TV Series';
   static const String movie = 'Movie';
+
+  // ERROR PAGE STRINGS 
+  static const String errorTitle = 'Oops! Something went wrong.';
+  static const String errorDescription =
+      'We encountered an unexpected error. Please try again later.';
+  static const String errorButtonText = 'Try Again';
+  static const String errorNoInternetTitle = 'No Internet Connection';
+  static const String errorNoInternetDescription =
+      'Please check your internet connection and try again.';
+  
 }

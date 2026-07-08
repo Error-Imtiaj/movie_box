@@ -8,9 +8,14 @@ import 'package:movie_box/core/services/network/bloc/network_bloc.dart';
 import 'package:movie_box/core/router/router_navigation.dart';
 import 'package:movie_box/core/theme/app_theme.dart';
 import 'package:movie_box/feature/details/bloc/details_bloc.dart';
+import 'package:movie_box/feature/favourite/bloc/favourite_bloc.dart';
 import 'package:movie_box/feature/home/bloc/home_bloc.dart';
+import 'package:movie_box/feature/navigator/bloc/navigator_bloc.dart';
+import 'package:movie_box/feature/profile/bloc/profile_bloc.dart';
+import 'package:movie_box/feature/search/bloc/search_bloc.dart';
 import 'package:movie_box/feature/seeall/bloc/seeall_bloc.dart';
 import 'package:movie_box/feature/splash/bloc/splash_bloc.dart';
+import 'package:movie_box/feature/suggest/bloc/suggest_bloc.dart';
 
 final GlobalKey<ScaffoldMessengerState> messengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -38,9 +43,14 @@ class _MovieAppState extends State<MovieApp> {
               create: (_) => getIt<NetworkBloc>()..add(NetworkStarted()),
             ),
             BlocProvider(create: (_) => getIt<SplashBloc>()),
+            BlocProvider(create: (_) => getIt<NavigatorBloc>()),
             BlocProvider(create: (_) => getIt<HomeBloc>()),
             BlocProvider(create: (_) => getIt<SeeAllBloc>()),
             BlocProvider(create: (_) => getIt<DetailsBloc>()),
+            BlocProvider(create: (_) => getIt<SearchBloc>()),
+            BlocProvider(create: (_) => getIt<SuggestBloc>()),
+            BlocProvider(create: (_) => getIt<FavouriteBloc>()),
+            BlocProvider(create: (_) => getIt<ProfileBloc>()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

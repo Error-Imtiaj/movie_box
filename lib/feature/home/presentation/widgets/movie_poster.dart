@@ -7,6 +7,9 @@ import 'package:movie_box/core/const/app_strings.dart';
 import 'package:movie_box/feature/home/model/movie_model.dart';
 import 'package:movie_box/feature/home/presentation/widgets/media_type_badge.dart';
 import 'package:movie_box/feature/home/presentation/widgets/rating_badge.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_box/feature/favourite/bloc/favourite_bloc.dart';
 
 class MoviePoster extends StatelessWidget {
   final MovieModel movie;
@@ -23,17 +26,25 @@ class MoviePoster extends StatelessWidget {
           width: AppSize.moviePosterWidth.w,
           height: AppSize.moviePosterHeight.h,
           fit: BoxFit.cover,
-          borderRadius: BorderRadius.circular(AppSize.moviePosterBorderRadius.r),
+          borderRadius: BorderRadius.circular(
+            AppSize.moviePosterBorderRadius.r,
+          ),
         ),
         // Gradient overlay
         Positioned.fill(
           child: DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSize.moviePosterBorderRadius.r),
+              borderRadius: BorderRadius.circular(
+                AppSize.moviePosterBorderRadius.r,
+              ),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [AppColors.transparent, AppColors.black26, AppColors.black87],
+                colors: [
+                  AppColors.transparent,
+                  AppColors.black26,
+                  AppColors.black87,
+                ],
               ),
             ),
           ),
@@ -49,6 +60,40 @@ class MoviePoster extends StatelessWidget {
           top: 10,
           right: 10,
           child: RatingBadge(rating: movie.voteAverage),
+        ),
+        // Favourite button
+        Positioned(
+          bottom: 10,
+          right: 10,
+          child: BlocBuilder<FavouriteBloc, FavouriteState>(
+            builder: (context, state) {
+              final isFavourite =
+                  state is FavouriteLoaded &&
+                  state.movies.any((m) => m.id == movie.id);
+
+              return Material(
+                color: Colors.black.withOpacity(.45),
+                shape: const CircleBorder(),
+                child: InkWell(
+                  onTap: () {
+                    context.read<FavouriteBloc>().add(
+                      ToggleFavourite(movie),
+                    );
+                  },
+                  customBorder: const CircleBorder(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: HugeIcon(
+                      icon: HugeIcons.strokeRoundedFavourite,
+                      color: isFavourite ? Colors.red : Colors.white,
+                      size: 20.sp,
+                     // secondaryColor: Colors.blueAccent,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ],
     );

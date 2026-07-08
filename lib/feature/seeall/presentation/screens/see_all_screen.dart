@@ -39,49 +39,47 @@ class _SeeAllScreenState extends State<SeeAllScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.arguments.title)),
-      body: SafeArea(
-        child: BlocBuilder<SeeAllBloc, SeeAllState>(
-          builder: (_, state) {
-            if (state is SeeAllLoading) {
-              return MovieGridLoading();
-            }
-
-            if (state is SeeAllLoaded) {
-              return GridView.builder(
-                controller: controller,
-                padding: const EdgeInsets.all(16),
-                itemCount: state.movies.length + (state.isLoadingMore ? 2 : 0),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: .62,
-                ),
-                itemBuilder: (_, index) {
-                  if (index >= state.movies.length) {
-                    return const MovieGridSkeleton();
-                  }
-
-                  return MovieGridItem(
-                    movie: state.movies[index],
-                    onTap: () {
-                      context.push(
-                        Routes.detailsScreen,
-                        extra: DetailsArguments(
-                          id: state.movies[index].id,
-                          mediaType: state.movies[index].mediaType ?? "movie",
-                          heroTag: "${state.movies[index].title}_${state.movies[index].id}",
-                        ),
-                      );
-                    },
-                  );
-                },
-              );
-            }
-
-            return const SizedBox();
-          },
-        ),
+      body: BlocBuilder<SeeAllBloc, SeeAllState>(
+        builder: (_, state) {
+          if (state is SeeAllLoading) {
+            return MovieGridLoading();
+          }
+      
+          if (state is SeeAllLoaded) {
+            return GridView.builder(
+              controller: controller,
+              padding: const EdgeInsets.all(16),
+              itemCount: state.movies.length + (state.isLoadingMore ? 2 : 0),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 20,
+                childAspectRatio: .62,
+              ),
+              itemBuilder: (_, index) {
+                if (index >= state.movies.length) {
+                  return const MovieGridSkeleton();
+                }
+      
+                return MovieGridItem(
+                  movie: state.movies[index],
+                  onTap: () {
+                    context.push(
+                      Routes.detailsScreen,
+                      extra: DetailsArguments(
+                        id: state.movies[index].id,
+                        mediaType: state.movies[index].mediaType ?? "movie",
+                        heroTag: "${state.movies[index].title}_${state.movies[index].id}",
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          }
+      
+          return const SizedBox();
+        },
       ),
     );
   }

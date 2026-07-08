@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movie_box/bloc_observer.dart';
 import 'package:movie_box/core/dependency/service_locator.dart';
 import 'package:movie_box/movie_app.dart';
@@ -12,7 +13,7 @@ Future<void> main() async {
 
   Bloc.observer = AppBlocObserver();
   await dotenv.load(fileName: ".env");
-  print(dotenv.env);
+  await Hive.initFlutter();
   await ServiceLocator.init();
   debugPrint('Observer: ${Bloc.observer.runtimeType}');
 

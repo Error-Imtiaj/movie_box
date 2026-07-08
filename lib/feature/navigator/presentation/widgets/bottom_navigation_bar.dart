@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_box/core/const/app_colors.dart';
 import 'package:movie_box/core/const/app_icons.dart';
 import 'package:movie_box/core/const/app_size.dart';
+import 'package:movie_box/core/const/app_strings.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -24,13 +26,13 @@ class BottomNavBar extends StatelessWidget {
       // elevation: 12,
       child: SafeArea(
         child: SizedBox(
-          height: AppSize.navigationBarHeight,
+          height: AppSize.navigationBarHeight.h,
           child: Row(
             children: [
               Expanded(
                 child: _navItem(
                   icon: AppIcons.homeIcon,
-                  label: "Home",
+                  label: AppStrings.home,
                   index: 0,
                 ),
               ),
@@ -38,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.searchIcon,
-                  label: "Search",
+                  label: AppStrings.search,
                   index: 1,
                 ),
               ),
@@ -48,7 +50,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.favouriteIcon,
-                  label: "Favorite",
+                  label: AppStrings.favorite,
                   index: 3,
                 ),
               ),
@@ -56,7 +58,7 @@ class BottomNavBar extends StatelessWidget {
               Expanded(
                 child: _navItem(
                   icon: AppIcons.profileIcon,
-                  label: "Profile",
+                  label: AppStrings.profile,
                   index: 4,
                 ),
               ),
@@ -83,21 +85,26 @@ class BottomNavBar extends StatelessWidget {
       onTap: () => onTap(index),
       borderRadius: BorderRadius.circular(50),
       child: Column(
+        mainAxisSize:   MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           HugeIcon(
             icon: icon,
-            size: AppSize.navigationBarIconSize,
+            size: AppSize.navigationBarIconSize.r,
             strokeWidth: AppSize.navigationIconStrokeWidth,
             color: selected
                 ? AppColors.navigationBarSelectedItemColor
                 : AppColors.navigationBarUnselectedItemColor,
           ),
-          const SizedBox(height: 2),
+            const SizedBox(height: 2),
           Text(
             label,
+            maxLines: 1,
+            overflow: TextOverflow.fade,
+            textScaler: TextScaler.noScaling,
             style: TextStyle(
-              fontSize: AppSize.navigationTextSize,
+              fontSize: 12.sp,
+              height: 1,
               fontWeight: FontWeight.w700,
               color: selected
                   ? AppColors.navigationBarSelectedItemColor
